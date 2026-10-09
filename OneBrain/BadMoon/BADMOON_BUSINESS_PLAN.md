@@ -90,19 +90,28 @@ Patch test before use / Tester avant utilisation
 
 **Channel: Direct — coworkers, word of mouth, local**
 
-**Pricing:**
-| Size | Price | Cost | Margin |
+**Pricing (bigger = better deal per gram):**
+| Size | Price | COGS (incl tin + label) | Profit | Per gram |
+|---|---|---|---|---|
+| Trial 10g tin | $4.98 | ~$1.20 | $3.78 | $0.50/g |
+| Standard 30g tin | $12.98 | ~$2.60 | $10.38 | $0.43/g (14% savings) |
+| Full 50g tin | $18.98 | ~$3.80 | $15.18 | $0.38/g (24% savings) |
+
+**COGS breakdown per unit:**
+| Component | 10g | 30g | 50g |
 |---|---|---|---|
-| Trial 10g tin | $8-10 | ~$2 | 75-80% |
-| Standard 30g tin | $18-22 | ~$5.80 | 68-74% |
-| Premium 50g tin | $28-32 | ~$8 | 71-75% |
+| Balm ingredients | $0.60 | $1.80 | $2.80 |
+| Tin (AliExpress bulk) | $0.15 | $0.35 | $0.50 |
+| Label (printed sticker) | $0.20 | $0.20 | $0.25 |
+| Misc (shrink wrap, etc.) | $0.25 | $0.25 | $0.25 |
+| **Total COGS** | **$1.20** | **$2.60** | **$3.80** |
 
 **Upgraded base formula (from research):**
 - Beeswax 20% + Jojoba oil 65% + Fragrance oils 15%
 - Better scent throw, premium feel, "clean beauty" positioning
 - Cost per 30g jar: ~$3-4
 
-**Revenue target:** 5 jars/week × $20 avg = $100/week = $400/month
+**Revenue target:** 10 units/week × $10 avg (mix of sizes) = $100/week = $400/month
 
 **Marketing cost:** $0
 - Carriers wear it, people ask
@@ -131,7 +140,7 @@ Patch test before use / Tester avant utilisation
 | Creed Aventus ($400) | "Emperor" | Bergamot, blackcurrant, birch, ambroxan | ~$2.50 |
 | Tom Ford Oud Wood ($300) | "Dark Wood" | Oud, rosewood, cardamom, sandalwood | ~$3.00 |
 
-**Retail $20-35 vs designer $130-400. Same scent profile. 90% margin.**
+**Retail $4.98-$18.98 vs designer $130-400. Same scent profile. 75-80% margin.**
 
 ---
 
@@ -150,7 +159,7 @@ Patch test before use / Tester avant utilisation
 - Amazon Handmade (not Amazon Beauty — handmade is easier to get into)
 - TikTok Shop
 
-**Revenue target:** 20 jars/week × $22 avg = $440/week = $1,760/month
+**Revenue target:** 30 units/week × $12 avg (mix of sizes) = $360/week = $1,440/month
 
 ---
 
@@ -172,24 +181,22 @@ Patch test before use / Tester avant utilisation
 
 | Item | Amount |
 |---|---|
-| Startup costs | -$812 |
-| Revenue (conservative: 5 jars/week avg) | $5,200 |
-| COGS (30g jars @ $4 avg) | -$1,040 |
+| Startup costs (legal, insurance, supplies) | -$812 |
+| Revenue (10 units/week avg × $10 avg × 52 weeks) | $5,200 |
+| COGS (avg $2 per unit × 520 units) | -$1,040 |
 | Insurance | -$400 |
-| Packaging/labels | -$200 |
-| **Net profit Year 1** | **~$2,748** |
+| **Net profit Year 1** | **~$2,948** |
 
 ### Year 2 (Nov 2027 — Oct 2028)
 
 | Item | Amount |
 |---|---|
-| Revenue (20 jars/week avg) | $22,880 |
-| COGS | -$4,160 |
+| Revenue (30 units/week × $12 avg × 52 weeks) | $18,720 |
+| COGS (avg $2.50 × 1,560 units) | -$3,900 |
 | Insurance | -$400 |
-| Packaging/labels/shipping | -$1,500 |
 | Farmers market fees | -$500 |
-| GST registration (if >$30K) | File but collect |
-| **Net profit Year 2** | **~$16,320** |
+| Shipping/misc | -$500 |
+| **Net profit Year 2** | **~$13,420** |
 
 ### Personal savings from replacing Axe
 | | Year 1 | Year 2+ |
@@ -243,8 +250,8 @@ BadMoon doesn't advertise. It deploys carriers.
 | "What are you wearing?" count | Track weekly |
 | First paid sale | By Nov 15 |
 | Repeat customer | By Dec 15 |
-| Jars/week | 5 by Jan, 20 by Jun |
-| Revenue/month | $400 by Jan, $1,760 by Jun |
+| Units/week | 5 by Jan, 15 by Mar, 30 by Jun |
+| Revenue/month | $200 by Jan, $600 by Mar, $1,440 by Jun |
 | Variants launched | 4 by Mar 2027 |
 | Online store live | By Mar 2027 |
 | Farmers market | Apply Feb 2027 |
