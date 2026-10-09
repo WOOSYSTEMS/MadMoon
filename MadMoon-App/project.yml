@@ -1,0 +1,26 @@
+name: MadMoon
+options:
+  bundleIdPrefix: com.madmoon
+  deploymentTarget:
+    iOS: "18.0"
+  xcodeVersion: "16.0"
+  generateEmptyDirectories: true
+
+settings:
+  base:
+    SWIFT_VERSION: "6.0"
+    DEVELOPMENT_TEAM: "BN4K2M386C"
+    MARKETING_VERSION: "0.1.0"
+    CURRENT_PROJECT_VERSION: "1"
+
+targets:
+  MadMoon:
+    type: application
+    platform: iOS
+    sources:
+      - MadMoon
+    settings:
+      base:
+        INFOPLIST_FILE: MadMoon/Info.plist
+        PRODUCT_BUNDLE_IDENTIFIER: com.madmoon.app
+        CODE_SIGN_STYLE: Automatic

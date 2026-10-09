@@ -1,0 +1,29 @@
+[
+  {
+    "name": "Report Dashboard",
+    "path": "/safety/dashboard/",
+    "status": 302,
+    "redirect": "https://about.meta.com/actions/safety"
+  },
+  {
+    "name": "business.facebook.com/graphiql",
+    "path": "/graphiql",
+    "host": "business.facebook.com",
+    "status": 200,
+    "size": 457140
+  },
+  {
+    "name": "business.facebook.com/.env",
+    "path": "/.env",
+    "host": "business.facebook.com",
+    "status": 200,
+    "size": 456980
+  },
+  {
+    "name": "web.whatsapp.com/status",
+    "path": "/status",
+    "host": "web.whatsapp.com",
+    "status": 200,
+    "size": 40485
+  }
+]

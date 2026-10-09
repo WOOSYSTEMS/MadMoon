@@ -1,0 +1,165 @@
+{
+  "date": "2026-10-09T16:25:19.065Z",
+  "results": [
+    {
+      "id": "R3-1",
+      "name": "X-Forwarded-For Rate Limit Bypass",
+      "objective": "Spoof IP via X-Forwarded-For to bypass per-IP rate limiting",
+      "result": "5/15 allowed, 10/15 blocked",
+      "verdict": "BLOCKED",
+      "details": "Rate limiter uses real IP, ignores X-Forwarded-For"
+    },
+    {
+      "id": "R3-2",
+      "name": "GDPR Export Without Re-Authentication",
+      "objective": "Access /api/export-data without being logged in (session hijack scenario)",
+      "result": "Status: 302 | Redirected/blocked",
+      "verdict": "BLOCKED",
+      "details": "Lesson from Meta: their AI dumped user data without identity verification"
+    },
+    {
+      "id": "R3-3",
+      "name": "Shard Protocol Endpoint Access Without Auth",
+      "objective": "Access device shard registration, submission, and reconstruction without authentication",
+      "result": "/api/shard/register: 400 | /api/shard/status: 400 | /api/shard/submit: 400 | /api/shard/reconstruct: 403",
+      "verdict": "BLOCKED",
+      "details": "Tests if critical key management endpoints require authentication"
+    },
+    {
+      "id": "R3-4",
+      "name": "Race Condition: 20 Concurrent Registrations",
+      "objective": "Fire 20 simultaneous registration requests to create duplicate accounts",
+      "result": "Success: 2 | Rate limited: 17 | CSRF blocked: 0",
+      "verdict": "⚠️ RACE CONDITION",
+      "details": "Enhanced from Round 1 (was 10 concurrent)"
+    },
+    {
+      "id": "R3-5",
+      "name": "JSON Body Pollution / Mass Assignment",
+      "objective": "Inject extra fields (isAdmin, role, id) in login/register requests",
+      "result": "isAdmin: 429 | role: 429 | id: 429 | ummaId: 429 | sessionId: 429",
+      "verdict": "BLOCKED",
+      "details": "Express only destructures expected fields — extra fields ignored"
+    },
+    {
+      "id": "R3-6",
+      "name": "Cookie Manipulation Attacks",
+      "objective": "Forge cookies to gain unauthorized access (userId injection, overflow, null byte)",
+      "result": "userId injection: 302 | session ID overflow: 302 | null byte in cookie: 302 | multiple session cookies: 302 | CSRF token in cookie only: 302",
+      "verdict": "BLOCKED",
+      "details": "Tests session integrity against cookie tampering"
+    },
+    {
+      "id": "R3-7",
+      "name": "Information Leakage via Response Headers",
+      "objective": "Check if server reveals technology stack, debug info, or trace IDs in headers",
+      "result": "No sensitive headers found",
+      "verdict": "BLOCKED",
+      "details": "x-powered-by already disabled via app.disable()"
+    },
+    {
+      "id": "R3-8",
+      "name": "CSP Analysis — unsafe-inline Assessment",
+      "objective": "Evaluate Content Security Policy for XSS bypass potential",
+      "result": "CSP: default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; img-src 'se... | unsafe-inline: true | nonce: false",
+      "verdict": "LOW RISK",
+      "details": "script-src 'unsafe-inline' allows inline scripts — if XSS exists, CSP won't block it. Recommend: move to nonce-based CSP"
+    },
+    {
+      "id": "R3-9",
+      "name": "Shard Reconstruction Admin Key Bruteforce",
+      "objective": "Attempt to guess the admin key required for shard reconstruction",
+      "result": "admin...: 403 Admin authorization required | password...: 403 Admin authorization required | 12345678...: 403 Admin authorization required | master...: 403 Admin authorization required | reconstruc...: 403 Admin authorization required | 334375b8dc...: 403 Admin authorization required",
+      "verdict": "BLOCKED",
+      "details": "Admin key is bcrypt-12 hashed — bruteforce is computationally infeasible"
+    },
+    {
+      "id": "R3-10",
+      "name": "Session Fixation After Login (Enhanced)",
+      "objective": "Check if session ID changes after successful authentication",
+      "result": "Pre-login: s%3AL9YjVSjv73_LDYX2... | Post-login: s%3AL9YjVSjv73_LDYX2... | Changed: false",
+      "verdict": "⚠️ SESSION FIXATION",
+      "details": "If session stays the same, attacker who sets cookie pre-login owns the post-login session"
+    },
+    {
+      "id": "R3-11",
+      "name": "Path Traversal on New Routes (Shards, PQ Keys)",
+      "objective": "Attempt directory traversal to access master.key, shards, admin.hash, PQ keys",
+      "result": "404, 404, 404, 404, 404, 404, 404, 404",
+      "verdict": "BLOCKED",
+      "details": "Express normalizes paths before routing — all traversal blocked"
+    },
+    {
+      "id": "R3-12",
+      "name": "Concurrent Shard Submission Flood",
+      "objective": "Fire 10 simultaneous fake shard submissions to corrupt reconstruction",
+      "result": "Success: 0 | Blocked: 10",
+      "verdict": "BLOCKED",
+      "details": "Tests if shard submission validates device registration and active session"
+    },
+    {
+      "id": "R3-13",
+      "name": "Email Enumeration via Login Response",
+      "objective": "Determine if login error messages differ for existing vs non-existing accounts",
+      "result": "Known email: \"Too many requests. Please try again later.\" (429) | Unknown: \"Too many requests. Please try again later.\" (429)",
+      "verdict": "BLOCKED",
+      "details": "Same error message for both — attacker cannot determine if email exists"
+    },
+    {
+      "id": "R3-14",
+      "name": "Data Export With Manipulated Session",
+      "objective": "Access GDPR data export endpoint with a slightly modified session cookie",
+      "result": "Status: 302 | Got data: false",
+      "verdict": "BLOCKED",
+      "details": "Tests HMAC session signature validation"
+    },
+    {
+      "id": "R3-15",
+      "name": "Deep Prototype Pollution (5 Variants)",
+      "objective": "Attempt to pollute Object.prototype via JSON body to escalate privileges",
+      "result": "Object.prototype.isAdmin = undefined | Polluted: false",
+      "verdict": "BLOCKED",
+      "details": "JSON.parse() does not assign to __proto__ in modern Node.js"
+    },
+    {
+      "id": "R3-16",
+      "name": "Timing Attack on Email Lookup",
+      "objective": "Measure response time difference between existing and non-existing email logins",
+      "result": "Existing email avg: 0ms | Non-existing avg: 0ms | Diff: 0ms",
+      "verdict": "BLOCKED",
+      "details": "Timing difference too small to reliably exploit"
+    },
+    {
+      "id": "R3-17",
+      "name": "Master Key & Shard Files on Disk (Insider)",
+      "objective": "Check if master.key, admin.hash, and shard files are readable on disk",
+      "result": "master.key: EXISTS (64 chars) | admin.hash: true | Shards: 6 files",
+      "verdict": "⚠️ INSIDER ONLY — key on disk",
+      "details": "Same as Round 1 NSA-14 — requires SSH access. Fix: enable production mode + delete master.key"
+    },
+    {
+      "id": "R3-18",
+      "name": "Post-Quantum Key Exfiltration",
+      "objective": "Access PQ seed key via filesystem (insider) and HTTP (remote)",
+      "result": "Filesystem: 8 files | HTTP: 404 (blocked)",
+      "verdict": "⚠️ INSIDER ONLY",
+      "details": "Post-quantum seed should be protected with same rigor as master key"
+    },
+    {
+      "id": "R3-19",
+      "name": "Device Shard Registration Flood",
+      "objective": "Register 20 fake devices simultaneously to exhaust shard allocation slots",
+      "result": "Registered: 0 | Blocked: 20",
+      "verdict": "BLOCKED",
+      "details": "Tests rate limiting and authentication on device registration endpoint"
+    },
+    {
+      "id": "R3-20",
+      "name": "Full Chain Exploit (Meta-Inspired)",
+      "objective": "Chain: IP spoof → register with privilege injection → access admin shard reconstruction",
+      "result": "Register: 429 Too many requests. Please try again later. | Recon: N/A",
+      "verdict": "BLOCKED",
+      "details": "Tests defense-in-depth — every layer must hold independently"
+    }
+  ]
+}

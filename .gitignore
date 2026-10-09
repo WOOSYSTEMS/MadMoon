@@ -1,0 +1,17 @@
+# Sensitive files
+config.json
+*.key
+*.hash
+*.db
+*.env
+.env*
+node_modules/
+tunnel.log
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Session/cookie files
+*.cookies
+*.session

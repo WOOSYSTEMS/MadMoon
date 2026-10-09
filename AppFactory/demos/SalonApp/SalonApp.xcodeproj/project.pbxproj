@@ -1,0 +1,390 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 54;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		46CA2DFDB91206A028AE557B /* SalonApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 269C3283313E4E351048EF9C /* SalonApp.swift */; };
+		570F11AFBADD487A4A08A8A2 /* Theme.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FFFDA903E67E29804A7B35F /* Theme.swift */; };
+		5BE5AF3594B32377D241CF2E /* ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4946A4661A9BA45F65E5E4D1 /* ProfileView.swift */; };
+		955EF615A3DFFC860FF0E8C2 /* AppointmentsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 775D8023F7111EB7FE5497A1 /* AppointmentsView.swift */; };
+		BCFE31D593836C7966998CD4 /* ServicesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5FDCD5BBCA5EFAB8062AA9D8 /* ServicesView.swift */; };
+		BF4155EE7293D81A70A09484 /* BookingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BB18726EE2CAAE71B2F990D /* BookingView.swift */; };
+		CE48BE7AFEC9946BB90CF562 /* Models.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82B927A6450B808AEB2D6A9A /* Models.swift */; };
+		D3BBEC6232EC6D0F0D948C99 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F159FB3BADB47A3B4B6E2FED /* HomeView.swift */; };
+		F85EA237146E7627E63F8D54 /* MainTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F61F45D51405D6EC0EA34DF2 /* MainTabView.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		269C3283313E4E351048EF9C /* SalonApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SalonApp.swift; sourceTree = "<group>"; };
+		2FFFDA903E67E29804A7B35F /* Theme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Theme.swift; sourceTree = "<group>"; };
+		4946A4661A9BA45F65E5E4D1 /* ProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileView.swift; sourceTree = "<group>"; };
+		5FDCD5BBCA5EFAB8062AA9D8 /* ServicesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServicesView.swift; sourceTree = "<group>"; };
+		775D8023F7111EB7FE5497A1 /* AppointmentsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppointmentsView.swift; sourceTree = "<group>"; };
+		82B927A6450B808AEB2D6A9A /* Models.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Models.swift; sourceTree = "<group>"; };
+		8BB18726EE2CAAE71B2F990D /* BookingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookingView.swift; sourceTree = "<group>"; };
+		CFED88CFE89600CA63131C98 /* SalonApp.app */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = wrapper.application; path = SalonApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		F159FB3BADB47A3B4B6E2FED /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
+		F61F45D51405D6EC0EA34DF2 /* MainTabView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabView.swift; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXGroup section */
+		0835B5D41870C9CCE5F16375 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				CFED88CFE89600CA63131C98 /* SalonApp.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		253D634F80478A64AFBD9421 /* Sources */ = {
+			isa = PBXGroup;
+			children = (
+				269C3283313E4E351048EF9C /* SalonApp.swift */,
+				B40D4582EA52119D61C1C7D1 /* Models */,
+				EF16F15D98BF065C4A9B69A3 /* Theme */,
+				B27D4A7A3A40571E56A29B4C /* Views */,
+			);
+			name = Sources;
+			path = SalonApp/Sources;
+			sourceTree = "<group>";
+		};
+		655A6B1632E90F8D2B361A07 /* Profile */ = {
+			isa = PBXGroup;
+			children = (
+				4946A4661A9BA45F65E5E4D1 /* ProfileView.swift */,
+			);
+			path = Profile;
+			sourceTree = "<group>";
+		};
+		8B10BE33B9A2BF44A09B0285 /* Booking */ = {
+			isa = PBXGroup;
+			children = (
+				8BB18726EE2CAAE71B2F990D /* BookingView.swift */,
+			);
+			path = Booking;
+			sourceTree = "<group>";
+		};
+		AF98FE314E7877FE0A267F21 /* Appointments */ = {
+			isa = PBXGroup;
+			children = (
+				775D8023F7111EB7FE5497A1 /* AppointmentsView.swift */,
+			);
+			path = Appointments;
+			sourceTree = "<group>";
+		};
+		B27D4A7A3A40571E56A29B4C /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				F61F45D51405D6EC0EA34DF2 /* MainTabView.swift */,
+				AF98FE314E7877FE0A267F21 /* Appointments */,
+				8B10BE33B9A2BF44A09B0285 /* Booking */,
+				D4B7CD6474D9F9E24EF7548B /* Home */,
+				655A6B1632E90F8D2B361A07 /* Profile */,
+				BCA70780C23DAC42FA0B5473 /* Services */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		B40D4582EA52119D61C1C7D1 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				82B927A6450B808AEB2D6A9A /* Models.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		B4ECD6797B95C7F40264DDDD = {
+			isa = PBXGroup;
+			children = (
+				253D634F80478A64AFBD9421 /* Sources */,
+				0835B5D41870C9CCE5F16375 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		BCA70780C23DAC42FA0B5473 /* Services */ = {
+			isa = PBXGroup;
+			children = (
+				5FDCD5BBCA5EFAB8062AA9D8 /* ServicesView.swift */,
+			);
+			path = Services;
+			sourceTree = "<group>";
+		};
+		D4B7CD6474D9F9E24EF7548B /* Home */ = {
+			isa = PBXGroup;
+			children = (
+				F159FB3BADB47A3B4B6E2FED /* HomeView.swift */,
+			);
+			path = Home;
+			sourceTree = "<group>";
+		};
+		EF16F15D98BF065C4A9B69A3 /* Theme */ = {
+			isa = PBXGroup;
+			children = (
+				2FFFDA903E67E29804A7B35F /* Theme.swift */,
+			);
+			path = Theme;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		2986916E897893674126F7BE /* SalonApp */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 2C105AC5D9E5AFD9D2EEF424 /* Build configuration list for PBXNativeTarget "SalonApp" */;
+			buildPhases = (
+				B391230795C4880F530676F5 /* Sources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = SalonApp;
+			packageProductDependencies = (
+			);
+			productName = SalonApp;
+			productReference = CFED88CFE89600CA63131C98 /* SalonApp.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		F07C2EAD787220E646F53DF2 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = YES;
+				LastUpgradeCheck = 1430;
+				TargetAttributes = {
+					2986916E897893674126F7BE = {
+						DevelopmentTeam = BN4K2M386C;
+					};
+				};
+			};
+			buildConfigurationList = 6922C59087FB2FB3CA2E2A8B /* Build configuration list for PBXProject "SalonApp" */;
+			compatibilityVersion = "Xcode 14.0";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				Base,
+				en,
+			);
+			mainGroup = B4ECD6797B95C7F40264DDDD;
+			minimizedProjectReferenceProxies = 1;
+			preferredProjectObjectVersion = 54;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				2986916E897893674126F7BE /* SalonApp */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXSourcesBuildPhase section */
+		B391230795C4880F530676F5 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				955EF615A3DFFC860FF0E8C2 /* AppointmentsView.swift in Sources */,
+				BF4155EE7293D81A70A09484 /* BookingView.swift in Sources */,
+				D3BBEC6232EC6D0F0D948C99 /* HomeView.swift in Sources */,
+				F85EA237146E7627E63F8D54 /* MainTabView.swift in Sources */,
+				CE48BE7AFEC9946BB90CF562 /* Models.swift in Sources */,
+				5BE5AF3594B32377D241CF2E /* ProfileView.swift in Sources */,
+				46CA2DFDB91206A028AE557B /* SalonApp.swift in Sources */,
+				BCFE31D593836C7966998CD4 /* ServicesView.swift in Sources */,
+				570F11AFBADD487A4A08A8A2 /* Theme.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		083E061A96093FAA85D849FC /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				INFOPLIST_KEY_CFBundleDisplayName = "Luxe Beauty";
+				INFOPLIST_KEY_CFBundleShortVersionString = 1.0;
+				INFOPLIST_KEY_CFBundleVersion = 1;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.madmoon.demo.salon;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		22DCAA0508CD47BB04CFD942 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				DEVELOPMENT_TEAM = BN4K2M386C;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"$(inherited)",
+					"DEBUG=1",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 5.10;
+			};
+			name = Debug;
+		};
+		28D9360A8DEF1D8641366B1A /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DEVELOPMENT_TEAM = BN4K2M386C;
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				SWIFT_VERSION = 5.10;
+			};
+			name = Release;
+		};
+		69891A08793A9F227F8A6CBF /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				INFOPLIST_KEY_CFBundleDisplayName = "Luxe Beauty";
+				INFOPLIST_KEY_CFBundleShortVersionString = 1.0;
+				INFOPLIST_KEY_CFBundleVersion = 1;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.madmoon.demo.salon;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		2C105AC5D9E5AFD9D2EEF424 /* Build configuration list for PBXNativeTarget "SalonApp" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				69891A08793A9F227F8A6CBF /* Debug */,
+				083E061A96093FAA85D849FC /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+		6922C59087FB2FB3CA2E2A8B /* Build configuration list for PBXProject "SalonApp" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				22DCAA0508CD47BB04CFD942 /* Debug */,
+				28D9360A8DEF1D8641366B1A /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = F07C2EAD787220E646F53DF2 /* Project object */;
+}

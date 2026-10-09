@@ -1,0 +1,156 @@
+[
+  {
+    "name": "Profile",
+    "path": "/me",
+    "status": 302,
+    "size": 0,
+    "accessible": true
+  },
+  {
+    "name": "Settings",
+    "path": "/settings",
+    "status": 200,
+    "size": 984429,
+    "accessible": true
+  },
+  {
+    "name": "Privacy",
+    "path": "/settings/privacy",
+    "status": 302,
+    "size": 0,
+    "accessible": true
+  },
+  {
+    "name": "Security",
+    "path": "/settings/security",
+    "status": 302,
+    "size": 0,
+    "accessible": true
+  },
+  {
+    "name": "Payments",
+    "path": "/settings/payments",
+    "status": 404,
+    "size": 988892,
+    "accessible": false
+  },
+  {
+    "name": "Apps",
+    "path": "/settings/applications",
+    "status": 404,
+    "size": 988965,
+    "accessible": false
+  },
+  {
+    "name": "Business",
+    "path": "/business/",
+    "status": 200,
+    "size": 381651,
+    "accessible": true
+  },
+  {
+    "name": "Ads Manager",
+    "path": "/adsmanager/",
+    "status": 302,
+    "size": 0,
+    "accessible": true
+  },
+  {
+    "name": "Commerce",
+    "path": "/commerce_manager/",
+    "status": 302,
+    "size": 0,
+    "accessible": true
+  },
+  {
+    "name": "Creator Studio",
+    "path": "/creatorstudio/",
+    "status": 301,
+    "size": 0,
+    "accessible": false
+  },
+  {
+    "name": "Graph API Explorer",
+    "path": "/tools/explorer/",
+    "status": 404,
+    "size": 943760,
+    "accessible": false
+  },
+  {
+    "name": "Developer",
+    "path": "/developers/",
+    "status": 200,
+    "size": 942084,
+    "accessible": true
+  },
+  {
+    "name": "Marketplace",
+    "path": "/marketplace/",
+    "status": 200,
+    "size": 981401,
+    "accessible": true
+  },
+  {
+    "name": "Gaming",
+    "path": "/gaming/",
+    "status": 302,
+    "size": 0,
+    "accessible": true
+  },
+  {
+    "name": "Watch",
+    "path": "/watch/",
+    "status": 302,
+    "size": 0,
+    "accessible": true
+  },
+  {
+    "name": "Reels",
+    "path": "/reel/",
+    "status": 200,
+    "size": 996781,
+    "accessible": true
+  },
+  {
+    "name": "Groups",
+    "path": "/groups/feed/",
+    "status": 200,
+    "size": 956054,
+    "accessible": true
+  },
+  {
+    "name": "Events",
+    "path": "/events/",
+    "status": 200,
+    "size": 970243,
+    "accessible": true
+  },
+  {
+    "name": "Fundraisers",
+    "path": "/fundraisers/",
+    "status": 200,
+    "size": 988602,
+    "accessible": true
+  },
+  {
+    "name": "Password Reset",
+    "path": "/login/identify/",
+    "status": 200,
+    "size": 0,
+    "accessible": true
+  },
+  {
+    "name": "Recovery",
+    "path": "/recover/initiate/",
+    "status": 200,
+    "size": 945104,
+    "accessible": true
+  },
+  {
+    "name": "API Ping",
+    "path": "/api/graphql/",
+    "status": 200,
+    "size": 0,
+    "accessible": true
+  }
+]

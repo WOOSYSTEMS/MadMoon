@@ -1,0 +1,365 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 54;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		01EE431ABAE91B7FB1C4C3D4 /* Models.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58EA24357B42D3D901203B94 /* Models.swift */; };
+		63343F75A78F4A074CA06B8B /* DashboardAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 757A46210D2FA46C81DB0A66 /* DashboardAPI.swift */; };
+		6D71BE292C51197D2E542FFF /* SeedData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D16B6396731997BF8AE3086 /* SeedData.swift */; };
+		899BBB0245FBB37EFDF27C5B /* TerminalView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6166E418F7258279480372B4 /* TerminalView.swift */; };
+		9586F6B07C42C187EE771BC7 /* QuickCaptureView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A9B4DD784E2516C3FB35CF4 /* QuickCaptureView.swift */; };
+		AF790F1AABD527C371EC2ACB /* LiveCommandView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81B5D24381A4F2EE683F4FDD /* LiveCommandView.swift */; };
+		BFB0F5044F07B8C547BAC3C1 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F23D19D26095DE72033316C4 /* Assets.xcassets */; };
+		D0ED5BF60D839DE2B335FE98 /* MadMoonApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4A8701FA51A8C96BE9F23BD /* MadMoonApp.swift */; };
+		D79124A898CCCBED7C472AA0 /* CommandCenterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF91DEFB3D415FCF70D8B1C8 /* CommandCenterView.swift */; };
+		E8D1F7D47338DAA1A80FE9F9 /* ProjectDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2DB036B3BB434F0026F5B98 /* ProjectDetailView.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		2D16B6396731997BF8AE3086 /* SeedData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SeedData.swift; sourceTree = "<group>"; };
+		58EA24357B42D3D901203B94 /* Models.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Models.swift; sourceTree = "<group>"; };
+		6166E418F7258279480372B4 /* TerminalView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TerminalView.swift; sourceTree = "<group>"; };
+		6A9B4DD784E2516C3FB35CF4 /* QuickCaptureView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuickCaptureView.swift; sourceTree = "<group>"; };
+		757A46210D2FA46C81DB0A66 /* DashboardAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DashboardAPI.swift; sourceTree = "<group>"; };
+		81B5D24381A4F2EE683F4FDD /* LiveCommandView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LiveCommandView.swift; sourceTree = "<group>"; };
+		BFFDEB8B99621218EA096D0D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		C2DB036B3BB434F0026F5B98 /* ProjectDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectDetailView.swift; sourceTree = "<group>"; };
+		DF91DEFB3D415FCF70D8B1C8 /* CommandCenterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommandCenterView.swift; sourceTree = "<group>"; };
+		E4A8701FA51A8C96BE9F23BD /* MadMoonApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MadMoonApp.swift; sourceTree = "<group>"; };
+		EFBD690951FD46B9178D6337 /* MadMoon.app */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = wrapper.application; path = MadMoon.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		F23D19D26095DE72033316C4 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXGroup section */
+		21325EFCED2F0114A08958C7 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				DF91DEFB3D415FCF70D8B1C8 /* CommandCenterView.swift */,
+				81B5D24381A4F2EE683F4FDD /* LiveCommandView.swift */,
+				C2DB036B3BB434F0026F5B98 /* ProjectDetailView.swift */,
+				6A9B4DD784E2516C3FB35CF4 /* QuickCaptureView.swift */,
+				6166E418F7258279480372B4 /* TerminalView.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		479A44A2D03BBD911DE5D3C2 /* Services */ = {
+			isa = PBXGroup;
+			children = (
+				757A46210D2FA46C81DB0A66 /* DashboardAPI.swift */,
+			);
+			path = Services;
+			sourceTree = "<group>";
+		};
+		5BAF159D385A0CCF5B2E1499 = {
+			isa = PBXGroup;
+			children = (
+				E6A1A008CBE0C51BE9B7D312 /* MadMoon */,
+				DD66C6427F4B4843AA16B8A9 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		DD66C6427F4B4843AA16B8A9 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				EFBD690951FD46B9178D6337 /* MadMoon.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		E6904F6EFBA22F473E08E97B /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				58EA24357B42D3D901203B94 /* Models.swift */,
+				2D16B6396731997BF8AE3086 /* SeedData.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		E6A1A008CBE0C51BE9B7D312 /* MadMoon */ = {
+			isa = PBXGroup;
+			children = (
+				F23D19D26095DE72033316C4 /* Assets.xcassets */,
+				BFFDEB8B99621218EA096D0D /* Info.plist */,
+				E4A8701FA51A8C96BE9F23BD /* MadMoonApp.swift */,
+				E6904F6EFBA22F473E08E97B /* Models */,
+				479A44A2D03BBD911DE5D3C2 /* Services */,
+				21325EFCED2F0114A08958C7 /* Views */,
+			);
+			path = MadMoon;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		525915DD3AA54AE18198D7A2 /* MadMoon */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = DDECED49E6A1F24FE1FA08F7 /* Build configuration list for PBXNativeTarget "MadMoon" */;
+			buildPhases = (
+				751E36D1377022BDBC3723F0 /* Sources */,
+				D2D3A543782B27624AD2E475 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = MadMoon;
+			packageProductDependencies = (
+			);
+			productName = MadMoon;
+			productReference = EFBD690951FD46B9178D6337 /* MadMoon.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		BA3E6204897515167692763A /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = YES;
+				LastUpgradeCheck = 1600;
+				TargetAttributes = {
+					525915DD3AA54AE18198D7A2 = {
+						DevelopmentTeam = BN4K2M386C;
+						ProvisioningStyle = Automatic;
+					};
+				};
+			};
+			buildConfigurationList = 4893DE499FB64F8153547C7C /* Build configuration list for PBXProject "MadMoon" */;
+			compatibilityVersion = "Xcode 14.0";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				Base,
+				en,
+			);
+			mainGroup = 5BAF159D385A0CCF5B2E1499;
+			minimizedProjectReferenceProxies = 1;
+			preferredProjectObjectVersion = 54;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				525915DD3AA54AE18198D7A2 /* MadMoon */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		D2D3A543782B27624AD2E475 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				BFB0F5044F07B8C547BAC3C1 /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		751E36D1377022BDBC3723F0 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D79124A898CCCBED7C472AA0 /* CommandCenterView.swift in Sources */,
+				63343F75A78F4A074CA06B8B /* DashboardAPI.swift in Sources */,
+				AF790F1AABD527C371EC2ACB /* LiveCommandView.swift in Sources */,
+				D0ED5BF60D839DE2B335FE98 /* MadMoonApp.swift in Sources */,
+				01EE431ABAE91B7FB1C4C3D4 /* Models.swift in Sources */,
+				E8D1F7D47338DAA1A80FE9F9 /* ProjectDetailView.swift in Sources */,
+				9586F6B07C42C187EE771BC7 /* QuickCaptureView.swift in Sources */,
+				6D71BE292C51197D2E542FFF /* SeedData.swift in Sources */,
+				899BBB0245FBB37EFDF27C5B /* TerminalView.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		01E8746C33A7821C220C04D9 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				CURRENT_PROJECT_VERSION = 1;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				DEVELOPMENT_TEAM = BN4K2M386C;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"$(inherited)",
+					"DEBUG=1",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 18.0;
+				MARKETING_VERSION = 0.1.0;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 6.0;
+			};
+			name = Debug;
+		};
+		35BE05F1E80E18FF75AAA570 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				CURRENT_PROJECT_VERSION = 1;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DEVELOPMENT_TEAM = BN4K2M386C;
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 18.0;
+				MARKETING_VERSION = 0.1.0;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				SWIFT_VERSION = 6.0;
+			};
+			name = Release;
+		};
+		A7268879EB3DB05B74759003 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_STYLE = Automatic;
+				INFOPLIST_FILE = MadMoon/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.madmoon.app;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		BA96FB7CD358C4416C2992E4 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_STYLE = Automatic;
+				INFOPLIST_FILE = MadMoon/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.madmoon.app;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		4893DE499FB64F8153547C7C /* Build configuration list for PBXProject "MadMoon" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				01E8746C33A7821C220C04D9 /* Debug */,
+				35BE05F1E80E18FF75AAA570 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+		DDECED49E6A1F24FE1FA08F7 /* Build configuration list for PBXNativeTarget "MadMoon" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				A7268879EB3DB05B74759003 /* Debug */,
+				BA96FB7CD358C4416C2992E4 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = BA3E6204897515167692763A /* Project object */;
+}
