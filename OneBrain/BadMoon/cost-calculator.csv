@@ -1,0 +1,31 @@
+Item,Unit Cost,Units per Purchase,Cost per Unit,Notes
+Vaseline 100g jar,$4.26,1,$4.26,Base for 1 jar
+Cedarwood oil 30ml,$11.53,1,$0.77,30 drops per jar ~15 jars per bottle
+Spearmint oil 30ml,$11.53,1,$0.77,10 drops per jar ~15 jars per bottle
+Mini pill box (sample),$1.49,1,$1.49,3-pack = $4.48 / ~$1.49 each
+
+--- COST PER FULL JAR (100g) ---
+Component,Cost,,
+Vaseline,$4.26,,
+Cedarwood oil (30 drops),$0.77,,
+Spearmint oil (10 drops),$0.77,,
+TOTAL COST PER JAR,$5.80,,
+Suggested sell price,$12-15,,Coworker friendly — 2-3x markup
+Profit per jar,$6.20-9.20,,
+
+--- COST PER SAMPLE (2-3g) ---
+Component,Cost,,
+Vaseline portion,$0.11,,~1/40th of jar
+Oil portion,$0.04,,~1/40th of oil cost
+Container (pill box),$1.49,,Biggest cost for samples
+TOTAL COST PER SAMPLE,$1.64,,
+Note: samples are FREE for testing,,
+
+--- YEARLY PROJECTION (if 1 sale/week) ---
+Metric,Value,,
+Jars sold per year,52,,
+Revenue @ $12/jar,$624,,
+Cost @ $5.80/jar,$301.60,,
+Gross profit,$322.40,,
+Revenue @ $15/jar,$780,,
+Gross profit @ $15,$478.40,,
