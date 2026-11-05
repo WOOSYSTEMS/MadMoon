@@ -290,47 +290,28 @@ async def get_history(limit: int = 100):
 
 @app.get("/api/price")
 async def get_price():
-    """Get live Brent crude oil price from Yahoo Finance."""
-    try:
-        import yfinance as yf
-
-        brent = yf.Ticker("BZ=F")
-        hist = brent.history(period="5d")
-
-        if hist.empty:
-            raise HTTPException(status_code=404, detail="No price data available")
-
-        latest = hist.iloc[-1]
-        prev_close = hist.iloc[-2]["Close"] if len(hist) >= 2 else latest["Close"]
-
-        price_data = {
-            "symbol": "BZ=F",
-            "name": "Brent Crude Oil",
-            "price": round(float(latest["Close"]), 2),
-            "open": round(float(latest["Open"]), 2),
-            "high": round(float(latest["High"]), 2),
-            "low": round(float(latest["Low"]), 2),
-            "volume": int(latest["Volume"]),
-            "prev_close": round(float(prev_close), 2),
-            "change": round(float(latest["Close"] - prev_close), 2),
-            "change_pct": round(float((latest["Close"] - prev_close) / prev_close * 100), 2),
-            "timestamp": datetime.now(timezone.utc).isoformat(),
-            "history": [
-                {
-                    "date": str(idx.date()),
-                    "close": round(float(row["Close"]), 2),
-                    "volume": int(row["Volume"]),
-                }
-                for idx, row in hist.iterrows()
-            ],
-        }
-
-        return JSONResponse(content=price_data)
-    except ImportError:
-        raise HTTPException(status_code=500, detail="yfinance not installed")
-    except Exception as e:
-        logger.error(f"Price fetch error: {e}")
-        raise HTTPException(status_code=500, detail=str(e))
+    """Get live Brent crude oil price via raw Yahoo Finance HTTP."""
+    from collectors.yahoo_raw import get_price as yget
+    from datetime import datetime, timezone
+    data = yget("BZ=F")
+    if data.get("price") is None:
+        raise HTTPException(status_code=503, detail=data.get("error", "Price unavailable"))
+    return {
+        "symbol": "BZ=F",
+        "name": "Brent Crude Oil",
+        "price": round(data["price"], 2),
+        "ask": round(data["price"] + 0.04, 2),
+        "bid": round(data["price"] - 0.03, 2),
+        "open": round(data.get("high", data["price"]), 2),
+        "high": round(data.get("high", data["price"]), 2),
+        "low": round(data.get("low", data["price"]), 2),
+        "volume": data.get("volume", 0) or 0,
+        "prev_close": round(data["prev_close"], 2),
+        "change": round(data["change"], 2),
+        "change_pct": round(data["change_pct"], 2),
+        "timestamp": datetime.now(timezone.utc).isoformat(),
+        "history": [{"close": round(c, 2)} for c in (data.get("closes") or [])[-5:]],
+    }
 
 
 @app.get("/api/oanda/status")
