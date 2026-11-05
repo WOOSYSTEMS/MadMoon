@@ -1,0 +1,612 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MadEye Precision</title>
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+    background: #080810;
+    color: #e0e0e0;
+    font-family: 'SF Mono', 'Fira Code', 'Consolas', monospace;
+    min-height: 100vh;
+}
+
+/* Top Bar */
+.top-bar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 12px 24px;
+    background: linear-gradient(180deg, #0d0d1a 0%, #080810 100%);
+    border-bottom: 1px solid #1a1a2e;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+
+.top-bar h1 {
+    font-size: 18px;
+    color: #00ff88;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+}
+
+.top-bar h1 span {
+    color: #666;
+    font-size: 12px;
+    margin-left: 8px;
+}
+
+.stats-row {
+    display: flex;
+    gap: 24px;
+    flex-wrap: wrap;
+}
+
+.stat {
+    text-align: center;
+}
+
+.stat-label {
+    font-size: 10px;
+    color: #666;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.stat-value {
+    font-size: 20px;
+    font-weight: bold;
+}
+
+.stat-value.green { color: #00ff88; }
+.stat-value.red { color: #ff4444; }
+.stat-value.yellow { color: #ffaa00; }
+.stat-value.white { color: #ffffff; }
+
+/* Mode indicator */
+.mode-badge {
+    padding: 4px 12px;
+    border-radius: 4px;
+    font-size: 11px;
+    font-weight: bold;
+    letter-spacing: 1px;
+}
+
+.mode-live { background: #00ff8822; color: #00ff88; border: 1px solid #00ff88; }
+.mode-dry { background: #ffaa0022; color: #ffaa00; border: 1px solid #ffaa00; }
+
+/* Three columns */
+.columns {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 16px;
+    padding: 16px 24px;
+}
+
+@media (max-width: 900px) {
+    .columns { grid-template-columns: 1fr; }
+}
+
+/* Commodity card */
+.card {
+    background: #0d0d1a;
+    border: 1px solid #1a1a2e;
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+.card-header {
+    padding: 12px 16px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid #1a1a2e;
+}
+
+.card-header h2 {
+    font-size: 16px;
+    letter-spacing: 1px;
+}
+
+.card-header .price {
+    font-size: 14px;
+    color: #aaa;
+}
+
+.signal-badge {
+    display: inline-block;
+    padding: 4px 16px;
+    border-radius: 4px;
+    font-size: 14px;
+    font-weight: bold;
+    letter-spacing: 1px;
+    text-align: center;
+    margin: 12px 16px;
+}
+
+.signal-BUY { background: #00ff8833; color: #00ff88; border: 1px solid #00ff88; }
+.signal-SELL { background: #ff444433; color: #ff4444; border: 1px solid #ff4444; }
+.signal-HOLD { background: #66666633; color: #888; border: 1px solid #444; }
+.signal-NONE { background: #33333333; color: #555; border: 1px solid #333; }
+.signal-ERROR { background: #ff000033; color: #ff0000; border: 1px solid #ff0000; }
+
+/* Confidence meter */
+.confidence-section {
+    padding: 8px 16px;
+}
+
+.confidence-label {
+    font-size: 11px;
+    color: #666;
+    margin-bottom: 4px;
+}
+
+.confidence-bar {
+    width: 100%;
+    height: 8px;
+    background: #1a1a2e;
+    border-radius: 4px;
+    overflow: hidden;
+    position: relative;
+}
+
+.confidence-fill {
+    height: 100%;
+    border-radius: 4px;
+    transition: width 0.5s ease;
+}
+
+.confidence-fill.high { background: #00ff88; }
+.confidence-fill.medium { background: #ffaa00; }
+.confidence-fill.low { background: #ff4444; }
+
+.vote-count {
+    font-size: 12px;
+    color: #aaa;
+    margin-top: 4px;
+}
+
+/* Voters list */
+.voters {
+    padding: 8px 16px;
+    font-size: 11px;
+    color: #666;
+    max-height: 80px;
+    overflow-y: auto;
+}
+
+.voter-bull { color: #00cc66; }
+.voter-bear { color: #cc4444; }
+
+/* Confirmations */
+.confirmations {
+    padding: 8px 16px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4px;
+    font-size: 11px;
+}
+
+.conf-item {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+}
+
+.conf-pass { color: #00ff88; }
+.conf-fail { color: #ff4444; }
+.conf-na { color: #555; }
+
+/* Position */
+.position-section {
+    padding: 8px 16px;
+    border-top: 1px solid #1a1a2e;
+}
+
+.position-section h3 {
+    font-size: 12px;
+    color: #888;
+    margin-bottom: 4px;
+}
+
+.pos-detail {
+    font-size: 12px;
+    display: flex;
+    justify-content: space-between;
+    padding: 2px 0;
+}
+
+/* Trade history */
+.history-section {
+    padding: 16px 24px;
+}
+
+.history-section h2 {
+    font-size: 14px;
+    color: #888;
+    margin-bottom: 8px;
+    letter-spacing: 1px;
+}
+
+.history-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 12px;
+}
+
+.history-table th {
+    text-align: left;
+    padding: 6px 8px;
+    color: #666;
+    border-bottom: 1px solid #1a1a2e;
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.history-table td {
+    padding: 6px 8px;
+    border-bottom: 1px solid #0d0d1a;
+}
+
+.history-table tr:hover {
+    background: #1a1a2e22;
+}
+
+/* Footer */
+.footer {
+    padding: 8px 24px;
+    text-align: center;
+    font-size: 10px;
+    color: #333;
+    border-top: 1px solid #1a1a2e;
+}
+
+/* Scrollbar */
+::-webkit-scrollbar { width: 4px; }
+::-webkit-scrollbar-track { background: #080810; }
+::-webkit-scrollbar-thumb { background: #333; border-radius: 2px; }
+
+/* Loading pulse */
+@keyframes pulse {
+    0%, 100% { opacity: 0.4; }
+    50% { opacity: 1; }
+}
+
+.loading { animation: pulse 1.5s infinite; color: #555; }
+</style>
+</head>
+<body>
+
+<!-- Top Bar -->
+<div class="top-bar">
+    <h1>MadEye Precision <span id="mode-badge" class="mode-badge mode-dry">DRY RUN</span></h1>
+    <div class="stats-row">
+        <div class="stat">
+            <div class="stat-label">Win Rate</div>
+            <div class="stat-value green" id="win-rate">--</div>
+        </div>
+        <div class="stat">
+            <div class="stat-label">Total P/L</div>
+            <div class="stat-value white" id="total-pl">--</div>
+        </div>
+        <div class="stat">
+            <div class="stat-label">Trades</div>
+            <div class="stat-value white" id="total-trades">0</div>
+        </div>
+        <div class="stat">
+            <div class="stat-label">Open</div>
+            <div class="stat-value yellow" id="open-count">0</div>
+        </div>
+        <div class="stat">
+            <div class="stat-label">Max DD</div>
+            <div class="stat-value red" id="max-dd">--</div>
+        </div>
+        <div class="stat">
+            <div class="stat-label">Updated</div>
+            <div class="stat-value white" id="last-update" style="font-size:12px">--</div>
+        </div>
+    </div>
+</div>
+
+<!-- Three Columns -->
+<div class="columns">
+    <!-- Oil -->
+    <div class="card" id="card-oil">
+        <div class="card-header">
+            <h2 style="color:#ff8800">OIL (BCO)</h2>
+            <span class="price" id="oil-price">--</span>
+        </div>
+        <div class="signal-badge signal-NONE" id="oil-signal">WAITING</div>
+        <div class="confidence-section">
+            <div class="confidence-label">Collector Agreement: <span id="oil-vote-text">0/0</span></div>
+            <div class="confidence-bar">
+                <div class="confidence-fill low" id="oil-conf-fill" style="width:0%"></div>
+            </div>
+            <div class="vote-count" id="oil-votes">Bullish: 0 | Bearish: 0</div>
+        </div>
+        <div class="voters" id="oil-voters"></div>
+        <div class="confirmations" id="oil-confirmations">
+            <div class="conf-item conf-na">DXY: --</div>
+            <div class="conf-item conf-na">Tech: --</div>
+            <div class="conf-item conf-na">Mom: --</div>
+            <div class="conf-item conf-na">Vol: --</div>
+            <div class="conf-item conf-na">RSI: --</div>
+            <div class="conf-item conf-na">Time: --</div>
+        </div>
+        <div class="position-section" id="oil-position">
+            <h3>No Position</h3>
+        </div>
+    </div>
+
+    <!-- Gold -->
+    <div class="card" id="card-gold">
+        <div class="card-header">
+            <h2 style="color:#ffd700">GOLD (XAU)</h2>
+            <span class="price" id="gold-price">--</span>
+        </div>
+        <div class="signal-badge signal-NONE" id="gold-signal">WAITING</div>
+        <div class="confidence-section">
+            <div class="confidence-label">Collector Agreement: <span id="gold-vote-text">0/0</span></div>
+            <div class="confidence-bar">
+                <div class="confidence-fill low" id="gold-conf-fill" style="width:0%"></div>
+            </div>
+            <div class="vote-count" id="gold-votes">Bullish: 0 | Bearish: 0</div>
+        </div>
+        <div class="voters" id="gold-voters"></div>
+        <div class="confirmations" id="gold-confirmations">
+            <div class="conf-item conf-na">DXY: --</div>
+            <div class="conf-item conf-na">Tech: --</div>
+            <div class="conf-item conf-na">Mom: --</div>
+            <div class="conf-item conf-na">Vol: --</div>
+            <div class="conf-item conf-na">RSI: --</div>
+            <div class="conf-item conf-na">Time: --</div>
+        </div>
+        <div class="position-section" id="gold-position">
+            <h3>No Position</h3>
+        </div>
+    </div>
+
+    <!-- Silver -->
+    <div class="card" id="card-silver">
+        <div class="card-header">
+            <h2 style="color:#c0c0c0">SILVER (XAG)</h2>
+            <span class="price" id="silver-price">--</span>
+        </div>
+        <div class="signal-badge signal-NONE" id="silver-signal">WAITING</div>
+        <div class="confidence-section">
+            <div class="confidence-label">Collector Agreement: <span id="silver-vote-text">0/0</span></div>
+            <div class="confidence-bar">
+                <div class="confidence-fill low" id="silver-conf-fill" style="width:0%"></div>
+            </div>
+            <div class="vote-count" id="silver-votes">Bullish: 0 | Bearish: 0</div>
+        </div>
+        <div class="voters" id="silver-voters"></div>
+        <div class="confirmations" id="silver-confirmations">
+            <div class="conf-item conf-na">DXY: --</div>
+            <div class="conf-item conf-na">Tech: --</div>
+            <div class="conf-item conf-na">Mom: --</div>
+            <div class="conf-item conf-na">Vol: --</div>
+            <div class="conf-item conf-na">RSI: --</div>
+            <div class="conf-item conf-na">Time: --</div>
+        </div>
+        <div class="position-section" id="silver-position">
+            <h3>No Position</h3>
+        </div>
+    </div>
+</div>
+
+<!-- Trade History -->
+<div class="history-section">
+    <h2>TRADE HISTORY</h2>
+    <table class="history-table">
+        <thead>
+            <tr>
+                <th>Time</th>
+                <th>Commodity</th>
+                <th>Direction</th>
+                <th>Entry</th>
+                <th>Exit</th>
+                <th>P/L</th>
+                <th>Reason</th>
+                <th>Voters</th>
+            </tr>
+        </thead>
+        <tbody id="history-body">
+            <tr><td colspan="8" class="loading" style="text-align:center">Loading...</td></tr>
+        </tbody>
+    </table>
+</div>
+
+<div class="footer">
+    MadEye Precision Mode v1.0 | Auto-refresh 15s | Port 8803
+</div>
+
+<script>
+const API_BASE = '';
+
+function formatTime(iso) {
+    if (!iso) return '--';
+    const d = new Date(iso);
+    return d.toLocaleTimeString('en-US', { hour12: false, hour: '2-digit', minute: '2-digit' });
+}
+
+function formatDate(iso) {
+    if (!iso) return '--';
+    const d = new Date(iso);
+    return d.toLocaleDateString('en-US', { month: 'short', day: 'numeric' }) + ' ' +
+           d.toLocaleTimeString('en-US', { hour12: false, hour: '2-digit', minute: '2-digit' });
+}
+
+function updateSignalCard(commodity, data) {
+    const sig = data.signal || 'NONE';
+    const sigEl = document.getElementById(`${commodity}-signal`);
+    sigEl.textContent = sig;
+    sigEl.className = `signal-badge signal-${sig}`;
+
+    // Vote counts
+    const bull = data.bullish_count || 0;
+    const bear = data.bearish_count || 0;
+    const total = data.total_collectors || 0;
+    const agreeing = data.n_agreeing || 0;
+
+    document.getElementById(`${commodity}-vote-text`).textContent = `${agreeing}/${total}`;
+    document.getElementById(`${commodity}-votes`).textContent = `Bullish: ${bull} | Bearish: ${bear}`;
+
+    // Confidence bar
+    const confPct = Math.round((data.confidence || 0) * 100);
+    const confFill = document.getElementById(`${commodity}-conf-fill`);
+    confFill.style.width = confPct + '%';
+    confFill.className = 'confidence-fill ' + (confPct >= 40 ? 'high' : confPct >= 20 ? 'medium' : 'low');
+
+    // Voters
+    const votersEl = document.getElementById(`${commodity}-voters`);
+    let voterHtml = '';
+    if (data.bullish_voters && data.bullish_voters.length) {
+        voterHtml += data.bullish_voters.map(v => `<span class="voter-bull">${v}</span>`).join(', ');
+    }
+    if (data.bearish_voters && data.bearish_voters.length) {
+        if (voterHtml) voterHtml += ' | ';
+        voterHtml += data.bearish_voters.map(v => `<span class="voter-bear">${v}</span>`).join(', ');
+    }
+    votersEl.innerHTML = voterHtml || '<span style="color:#333">No strong votes</span>';
+
+    // Confirmations
+    const confEl = document.getElementById(`${commodity}-confirmations`);
+    const confs = data.confirmations || {};
+    const confNames = ['dxy', 'technical', 'momentum', 'volatility', 'rsi', 'time'];
+    const confLabels = ['DXY', 'Tech', 'Mom', 'Vol', 'RSI', 'Time'];
+    let confHtml = '';
+    confNames.forEach((name, i) => {
+        const val = confs[name];
+        let cls = 'conf-na';
+        let icon = '--';
+        if (val === true) { cls = 'conf-pass'; icon = 'PASS'; }
+        else if (val === false) { cls = 'conf-fail'; icon = 'FAIL'; }
+        confHtml += `<div class="conf-item ${cls}">${confLabels[i]}: ${icon}</div>`;
+    });
+    confEl.innerHTML = confHtml;
+}
+
+function updatePosition(commodity, positions) {
+    const posEl = document.getElementById(`${commodity}-position`);
+    const pos = positions.find(p => p.commodity === commodity);
+
+    if (!pos) {
+        posEl.innerHTML = '<h3>No Position</h3>';
+        return;
+    }
+
+    const plColor = pos.unrealized_pl_pct >= 0 ? '#00ff88' : '#ff4444';
+    const plSign = pos.unrealized_pl_pct >= 0 ? '+' : '';
+
+    posEl.innerHTML = `
+        <h3>${pos.direction} Position</h3>
+        <div class="pos-detail"><span>Entry:</span><span>$${pos.entry_price.toFixed(2)}</span></div>
+        <div class="pos-detail"><span>Current:</span><span>$${pos.current_price.toFixed(2)}</span></div>
+        <div class="pos-detail"><span>P/L:</span><span style="color:${plColor}">${plSign}${pos.unrealized_pl_pct.toFixed(2)}% ($${pos.unrealized_pl.toFixed(2)})</span></div>
+        <div class="pos-detail"><span>Units:</span><span>${pos.units}</span></div>
+        ${pos.trailing_active ? `<div class="pos-detail"><span>Trail Stop:</span><span style="color:#ffaa00">$${pos.trailing_stop_price.toFixed(4)}</span></div>` : ''}
+        <div class="pos-detail"><span>Since:</span><span>${formatTime(pos.entry_time)}</span></div>
+    `;
+}
+
+function updateHistory(trades) {
+    const tbody = document.getElementById('history-body');
+    const closedTrades = trades.filter(t => t.action === 'CLOSE').reverse().slice(0, 20);
+
+    if (!closedTrades.length) {
+        tbody.innerHTML = '<tr><td colspan="8" style="text-align:center;color:#333">No trades yet</td></tr>';
+        return;
+    }
+
+    tbody.innerHTML = closedTrades.map(t => {
+        const plColor = (t.pl_pct || 0) >= 0 ? '#00ff88' : '#ff4444';
+        const plSign = (t.pl_pct || 0) >= 0 ? '+' : '';
+        const voters = (t.voters || []).slice(0, 3).join(', ');
+        return `<tr>
+            <td>${formatDate(t.timestamp)}</td>
+            <td>${(t.commodity || '').toUpperCase()}</td>
+            <td>${t.direction || '--'}</td>
+            <td>$${(t.entry_price || 0).toFixed(2)}</td>
+            <td>$${(t.exit_price || 0).toFixed(2)}</td>
+            <td style="color:${plColor}">${plSign}${(t.pl_pct || 0).toFixed(2)}%</td>
+            <td>${t.reason || '--'}</td>
+            <td style="font-size:10px;color:#555">${voters || '--'}</td>
+        </tr>`;
+    }).join('');
+}
+
+async function fetchAll() {
+    try {
+        // Fetch signals
+        const sigResp = await fetch(API_BASE + '/api/signal');
+        if (sigResp.ok) {
+            const signals = await sigResp.json();
+            ['oil', 'gold', 'silver'].forEach(c => {
+                if (signals[c]) updateSignalCard(c, signals[c]);
+            });
+        }
+    } catch (e) { console.warn('Signal fetch error:', e); }
+
+    try {
+        // Fetch positions
+        const posResp = await fetch(API_BASE + '/api/positions');
+        if (posResp.ok) {
+            const posData = await posResp.json();
+            const positions = posData.positions || [];
+            ['oil', 'gold', 'silver'].forEach(c => updatePosition(c, positions));
+            document.getElementById('open-count').textContent = positions.length;
+        }
+    } catch (e) { console.warn('Position fetch error:', e); }
+
+    try {
+        // Fetch performance
+        const perfResp = await fetch(API_BASE + '/api/performance');
+        if (perfResp.ok) {
+            const perf = await perfResp.json();
+            const wr = document.getElementById('win-rate');
+            wr.textContent = perf.total_trades > 0 ? perf.win_rate + '%' : '--';
+            wr.className = 'stat-value ' + (perf.win_rate >= 80 ? 'green' : perf.win_rate >= 60 ? 'yellow' : 'red');
+
+            const plEl = document.getElementById('total-pl');
+            const plVal = perf.total_pl_pct || 0;
+            plEl.textContent = (plVal >= 0 ? '+' : '') + plVal.toFixed(1) + '%';
+            plEl.className = 'stat-value ' + (plVal >= 0 ? 'green' : 'red');
+
+            document.getElementById('total-trades').textContent = perf.total_trades || 0;
+            document.getElementById('max-dd').textContent = perf.max_drawdown ? '-' + perf.max_drawdown + '%' : '--';
+
+            // Mode badge
+            const badge = document.getElementById('mode-badge');
+            if (perf.dry_run) {
+                badge.textContent = 'DRY RUN';
+                badge.className = 'mode-badge mode-dry';
+            } else {
+                badge.textContent = 'LIVE';
+                badge.className = 'mode-badge mode-live';
+            }
+        }
+    } catch (e) { console.warn('Performance fetch error:', e); }
+
+    try {
+        // Fetch history
+        const histResp = await fetch(API_BASE + '/api/history?limit=50');
+        if (histResp.ok) {
+            const histData = await histResp.json();
+            updateHistory(histData.trades || []);
+        }
+    } catch (e) { console.warn('History fetch error:', e); }
+
+    document.getElementById('last-update').textContent = new Date().toLocaleTimeString('en-US', { hour12: false });
+}
+
+// Initial fetch + auto-refresh every 15 seconds
+fetchAll();
+setInterval(fetchAll, 15000);
+</script>
+</body>
+</html>

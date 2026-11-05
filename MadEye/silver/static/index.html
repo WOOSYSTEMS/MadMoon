@@ -1,0 +1,480 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MadEye | Silver</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+            background: #0a0a0f;
+            color: #e0e0e0;
+            min-height: 100vh;
+        }
+        .header {
+            background: linear-gradient(135deg, #0d1117 0%, #161b22 100%);
+            border-bottom: 1px solid #30363d;
+            padding: 16px 24px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .header h1 {
+            font-size: 22px;
+            font-weight: 700;
+            background: linear-gradient(135deg, #c0c0c0, #e8e8e8);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .header .subtitle {
+            font-size: 12px;
+            color: #8b949e;
+            margin-top: 2px;
+        }
+        .header .status {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 13px;
+        }
+        .status-dot {
+            width: 8px; height: 8px;
+            border-radius: 50%;
+            background: #3fb950;
+            animation: pulse 2s infinite;
+        }
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
+        }
+        .main { padding: 20px 24px; max-width: 1600px; margin: 0 auto; }
+
+        /* Signal Banner */
+        .signal-banner {
+            padding: 20px 24px;
+            border-radius: 12px;
+            margin-bottom: 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border: 1px solid #30363d;
+        }
+        .signal-banner.BUY, .signal-banner.STRONG_BUY {
+            background: linear-gradient(135deg, #0d2818 0%, #0d1117 100%);
+            border-color: #238636;
+        }
+        .signal-banner.SELL, .signal-banner.STRONG_SELL {
+            background: linear-gradient(135deg, #2d1117 0%, #0d1117 100%);
+            border-color: #da3633;
+        }
+        .signal-banner.HOLD {
+            background: linear-gradient(135deg, #1c1c00 0%, #0d1117 100%);
+            border-color: #d29922;
+        }
+        .signal-action {
+            font-size: 32px;
+            font-weight: 800;
+            letter-spacing: 2px;
+        }
+        .BUY .signal-action, .STRONG_BUY .signal-action { color: #3fb950; }
+        .SELL .signal-action, .STRONG_SELL .signal-action { color: #f85149; }
+        .HOLD .signal-action { color: #d29922; }
+        .signal-meta { text-align: right; }
+        .signal-meta .score { font-size: 24px; font-weight: 700; }
+        .signal-meta .conf { font-size: 14px; color: #8b949e; }
+
+        /* Key Metrics Row */
+        .metrics-row {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 12px;
+            margin-bottom: 20px;
+        }
+        .metric-card {
+            background: #161b22;
+            border: 1px solid #30363d;
+            border-radius: 10px;
+            padding: 16px;
+            text-align: center;
+        }
+        .metric-label { font-size: 11px; color: #8b949e; text-transform: uppercase; letter-spacing: 1px; }
+        .metric-value { font-size: 28px; font-weight: 700; margin-top: 4px; }
+        .metric-change { font-size: 13px; margin-top: 4px; }
+        .positive { color: #3fb950; }
+        .negative { color: #f85149; }
+        .silver-color { color: #c0c0c0; }
+        .gold-color { color: #ffd700; }
+        .copper-color { color: #b87333; }
+        .dxy-color { color: #58a6ff; }
+
+        /* GSR Highlight */
+        .gsr-highlight {
+            background: linear-gradient(135deg, #161b22 0%, #1c1c30 100%);
+            border: 2px solid #58a6ff;
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .gsr-value { font-size: 48px; font-weight: 800; color: #58a6ff; }
+        .gsr-label { font-size: 14px; color: #8b949e; }
+        .gsr-interpretation { font-size: 16px; max-width: 400px; }
+        .gsr-bar {
+            width: 100%;
+            height: 12px;
+            background: linear-gradient(to right, #f85149 0%, #d29922 30%, #3fb950 60%, #58a6ff 100%);
+            border-radius: 6px;
+            margin-top: 10px;
+            position: relative;
+        }
+        .gsr-marker {
+            width: 4px; height: 20px;
+            background: white;
+            border-radius: 2px;
+            position: absolute;
+            top: -4px;
+            transition: left 0.5s ease;
+        }
+
+        /* Factor Grid */
+        .factors-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 12px;
+            margin-bottom: 20px;
+        }
+        .factor-card {
+            background: #161b22;
+            border: 1px solid #30363d;
+            border-radius: 10px;
+            padding: 14px;
+        }
+        .factor-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 8px;
+        }
+        .factor-name { font-size: 13px; font-weight: 600; }
+        .factor-weight { font-size: 11px; color: #8b949e; }
+        .factor-score-bar {
+            height: 6px;
+            background: #21262d;
+            border-radius: 3px;
+            overflow: hidden;
+            margin-bottom: 6px;
+        }
+        .factor-score-fill {
+            height: 100%;
+            border-radius: 3px;
+            transition: width 0.5s ease;
+        }
+        .factor-direction {
+            font-size: 12px;
+            font-weight: 600;
+            padding: 2px 8px;
+            border-radius: 4px;
+            display: inline-block;
+        }
+        .factor-direction.BULLISH { background: #0d2818; color: #3fb950; }
+        .factor-direction.BEARISH { background: #2d1117; color: #f85149; }
+        .factor-direction.NEUTRAL { background: #1c1c00; color: #d29922; }
+        .factor-signals { font-size: 11px; color: #8b949e; margin-top: 6px; max-height: 40px; overflow: hidden; }
+
+        /* Reasoning */
+        .reasoning {
+            background: #161b22;
+            border: 1px solid #30363d;
+            border-radius: 10px;
+            padding: 16px;
+            margin-bottom: 20px;
+        }
+        .reasoning h3 { font-size: 14px; margin-bottom: 8px; color: #8b949e; }
+        .reasoning p { font-size: 13px; line-height: 1.5; }
+
+        .footer {
+            text-align: center;
+            padding: 20px;
+            color: #484f58;
+            font-size: 12px;
+            border-top: 1px solid #21262d;
+        }
+        .refresh-btn {
+            background: #21262d;
+            border: 1px solid #30363d;
+            color: #c9d1d9;
+            padding: 6px 14px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 12px;
+        }
+        .refresh-btn:hover { background: #30363d; }
+
+        @media (max-width: 900px) {
+            .metrics-row { grid-template-columns: repeat(2, 1fr); }
+            .factors-grid { grid-template-columns: 1fr; }
+            .gsr-highlight { flex-direction: column; text-align: center; gap: 12px; }
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <div>
+            <h1>MadEye | Silver (XAG/USD)</h1>
+            <div class="subtitle">10-Factor Trading Intelligence -- Gold/Silver Ratio Core</div>
+        </div>
+        <div class="status">
+            <div class="status-dot" id="statusDot"></div>
+            <span id="lastUpdate">Loading...</span>
+            <button class="refresh-btn" onclick="refreshData()">Refresh</button>
+        </div>
+    </div>
+
+    <div class="main">
+        <!-- Signal Banner -->
+        <div class="signal-banner HOLD" id="signalBanner">
+            <div>
+                <div class="signal-action" id="signalAction">LOADING</div>
+                <div style="font-size:13px;color:#8b949e;margin-top:4px" id="signalText">Initializing...</div>
+            </div>
+            <div class="signal-meta">
+                <div class="score" id="netScore">--</div>
+                <div class="conf" id="confidence">Confidence: --</div>
+            </div>
+        </div>
+
+        <!-- Key Metrics -->
+        <div class="metrics-row">
+            <div class="metric-card">
+                <div class="metric-label">Silver Price</div>
+                <div class="metric-value silver-color" id="silverPrice">--</div>
+                <div class="metric-change" id="silverChange">--</div>
+            </div>
+            <div class="metric-card">
+                <div class="metric-label">Gold/Silver Ratio</div>
+                <div class="metric-value dxy-color" id="gsrValue">--</div>
+                <div class="metric-change" id="gsrNote">Key signal</div>
+            </div>
+            <div class="metric-card">
+                <div class="metric-label">Copper</div>
+                <div class="metric-value copper-color" id="copperPrice">--</div>
+                <div class="metric-change" id="copperChange">--</div>
+            </div>
+            <div class="metric-card">
+                <div class="metric-label">DXY Dollar Index</div>
+                <div class="metric-value dxy-color" id="dxyValue">--</div>
+                <div class="metric-change" id="dxyChange">--</div>
+            </div>
+        </div>
+
+        <!-- GSR Highlight Panel -->
+        <div class="gsr-highlight">
+            <div>
+                <div class="gsr-label">GOLD/SILVER RATIO</div>
+                <div class="gsr-value" id="gsrBig">--</div>
+                <div class="gsr-bar">
+                    <div class="gsr-marker" id="gsrMarker" style="left:50%"></div>
+                </div>
+                <div style="display:flex;justify-content:space-between;font-size:10px;color:#484f58;margin-top:4px">
+                    <span>SELL &lt;60</span>
+                    <span>Mean ~70</span>
+                    <span>BUY &gt;85</span>
+                    <span>EXTREME &gt;100</span>
+                </div>
+            </div>
+            <div class="gsr-interpretation" id="gsrInterp">
+                The Gold/Silver Ratio is the #1 silver-specific signal.
+                Values above 85 historically precede major silver rallies.
+            </div>
+        </div>
+
+        <!-- 10 Factor Gauges -->
+        <div class="factors-grid" id="factorsGrid">
+            <!-- Populated by JS -->
+        </div>
+
+        <!-- Reasoning -->
+        <div class="reasoning">
+            <h3>Analysis Summary</h3>
+            <p id="reasoning">Waiting for data...</p>
+        </div>
+    </div>
+
+    <div class="footer">
+        MadEye Silver v1.0 -- MadMoon Security -- Port 8802 -- Auto-refresh 30s
+    </div>
+
+    <script>
+        const FACTOR_LABELS = {
+            "gold_silver_ratio": "Gold/Silver Ratio (20%)",
+            "industrial_demand": "Industrial Demand (15%)",
+            "dxy_silver": "Dollar Index DXY (12%)",
+            "real_rates_silver": "Real Interest Rates (10%)",
+            "etf_flows_silver": "ETF Flows SLV/PSLV (10%)",
+            "technical_silver": "Technical Analysis (10%)",
+            "comex_silver": "COMEX Inventory (8%)",
+            "geopolitical_silver": "Geopolitical/Supply (8%)",
+            "copper_correlation": "Copper Correlation (7%)",
+            "seasonal_silver": "Seasonal Patterns (5%)",
+        };
+
+        function getScoreColor(score) {
+            if (score >= 7) return '#3fb950';
+            if (score >= 6) return '#56d364';
+            if (score <= 3) return '#f85149';
+            if (score <= 4) return '#da3633';
+            return '#d29922';
+        }
+
+        function updateGSR(ratio) {
+            document.getElementById('gsrBig').textContent = ratio.toFixed(1);
+            document.getElementById('gsrValue').textContent = ratio.toFixed(1);
+
+            // Position marker on bar (range 50-110)
+            const pct = Math.max(0, Math.min(100, ((ratio - 50) / 60) * 100));
+            document.getElementById('gsrMarker').style.left = pct + '%';
+
+            let interp = '';
+            if (ratio > 100) {
+                interp = 'EXTREME -- Silver historically this cheap preceded 400%+ rallies. Maximum buy signal.';
+            } else if (ratio > 90) {
+                interp = 'Silver very cheap vs gold. Strong mean-reversion buy signal. Historically excellent entry.';
+            } else if (ratio > 85) {
+                interp = 'Silver cheap vs gold. Buy signal active. Ratio should revert toward 65-70 mean.';
+            } else if (ratio > 75) {
+                interp = 'Above modern average. Silver slightly cheap but not extreme. Watch for breakdown.';
+            } else if (ratio > 65) {
+                interp = 'Near historical mean (~70). Neutral zone. No strong signal either direction.';
+            } else if (ratio > 60) {
+                interp = 'Silver approaching expensive vs gold. Consider reducing silver exposure.';
+            } else {
+                interp = 'Silver expensive vs gold. Sell signal. Rotate to gold for better value.';
+            }
+            document.getElementById('gsrInterp').textContent = interp;
+        }
+
+        function renderFactors(factors) {
+            const grid = document.getElementById('factorsGrid');
+            grid.innerHTML = '';
+
+            const order = [
+                'gold_silver_ratio', 'industrial_demand', 'dxy_silver',
+                'real_rates_silver', 'etf_flows_silver', 'technical_silver',
+                'comex_silver', 'geopolitical_silver', 'copper_correlation',
+                'seasonal_silver'
+            ];
+
+            for (const name of order) {
+                const f = factors[name];
+                if (!f) continue;
+
+                const card = document.createElement('div');
+                card.className = 'factor-card';
+
+                const rawScore = f.raw_score || 5;
+                const direction = f.direction || 'NEUTRAL';
+                const signals = (f.signals || []).slice(0, 3).join(' | ');
+                const color = getScoreColor(rawScore);
+                const pct = (rawScore / 10) * 100;
+
+                card.innerHTML = `
+                    <div class="factor-header">
+                        <span class="factor-name">${FACTOR_LABELS[name] || name}</span>
+                        <span class="factor-direction ${direction}">${direction}</span>
+                    </div>
+                    <div class="factor-score-bar">
+                        <div class="factor-score-fill" style="width:${pct}%;background:${color}"></div>
+                    </div>
+                    <div style="display:flex;justify-content:space-between;font-size:12px">
+                        <span>Score: ${rawScore.toFixed(1)}/10</span>
+                        <span style="color:#484f58">Weight: ${(f.tier_weight || 1).toFixed(2)}</span>
+                    </div>
+                    <div class="factor-signals">${signals}</div>
+                `;
+                grid.appendChild(card);
+            }
+        }
+
+        async function fetchSignal() {
+            try {
+                const resp = await fetch('/api/signal');
+                if (!resp.ok) return;
+                const data = await resp.json();
+
+                // Signal banner
+                const banner = document.getElementById('signalBanner');
+                banner.className = 'signal-banner ' + data.action;
+                document.getElementById('signalAction').textContent = data.action;
+                document.getElementById('signalText').textContent = data.action_text || '';
+                document.getElementById('netScore').textContent = (data.net_score >= 0 ? '+' : '') + data.net_score.toFixed(1);
+                document.getElementById('confidence').textContent = 'Confidence: ' + (data.confidence * 100).toFixed(0) + '%';
+
+                // Reasoning
+                document.getElementById('reasoning').textContent = data.reasoning || 'No analysis available';
+
+                // GSR from signal
+                if (data.gsr_ratio) {
+                    updateGSR(data.gsr_ratio);
+                }
+
+                // Factors
+                if (data.factor_scores) {
+                    renderFactors(data.factor_scores);
+                }
+
+                // Timestamp
+                const ts = new Date(data.timestamp);
+                document.getElementById('lastUpdate').textContent = ts.toLocaleTimeString();
+
+            } catch (e) {
+                console.error('Signal fetch error:', e);
+            }
+        }
+
+        async function fetchPrice() {
+            try {
+                const resp = await fetch('/api/price');
+                if (!resp.ok) return;
+                const data = await resp.json();
+
+                document.getElementById('silverPrice').textContent = '$' + data.price.toFixed(2);
+                const changeClass = data.change >= 0 ? 'positive' : 'negative';
+                document.getElementById('silverChange').innerHTML =
+                    `<span class="${changeClass}">${data.change >= 0 ? '+' : ''}${data.change.toFixed(2)} (${data.change_pct >= 0 ? '+' : ''}${data.change_pct.toFixed(2)}%)</span>`;
+
+                if (data.gold_silver_ratio) {
+                    updateGSR(data.gold_silver_ratio);
+                }
+                if (data.copper_price) {
+                    document.getElementById('copperPrice').textContent = '$' + data.copper_price.toFixed(4);
+                }
+            } catch (e) {
+                console.error('Price fetch error:', e);
+            }
+        }
+
+        async function refreshData() {
+            try {
+                await fetch('/api/refresh', { method: 'POST' });
+                await fetchSignal();
+                await fetchPrice();
+            } catch (e) {
+                console.error('Refresh error:', e);
+            }
+        }
+
+        // Initial load
+        fetchSignal();
+        fetchPrice();
+
+        // Auto-refresh every 30 seconds
+        setInterval(() => {
+            fetchSignal();
+            fetchPrice();
+        }, 30000);
+    </script>
+</body>
+</html>

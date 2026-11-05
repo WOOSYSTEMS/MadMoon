@@ -1,0 +1,1 @@
+# MadEye Precision Mode

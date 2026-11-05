@@ -1,0 +1,881 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MadEye | Gold Intelligence</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        :root {
+            --bg: #080810;
+            --bg-card: #0e0e1a;
+            --bg-card-hover: #141425;
+            --border: #1a1a30;
+            --text: #c8c8d8;
+            --text-dim: #6a6a80;
+            --text-bright: #e8e8f0;
+            --cyan: #00e5ff;
+            --cyan-dim: #006680;
+            --green: #00ff88;
+            --green-dim: #006633;
+            --red: #ff3355;
+            --red-dim: #660015;
+            --yellow: #ffcc00;
+            --yellow-dim: #664d00;
+            --purple: #aa77ff;
+            --gold: #ffd700;
+            --gold-dim: #8b7500;
+        }
+
+        body {
+            font-family: 'SF Mono', 'Fira Code', 'Cascadia Code', 'JetBrains Mono', monospace;
+            background: var(--bg);
+            color: var(--text);
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        .header {
+            background: linear-gradient(135deg, #0a0a15 0%, #0e0e20 100%);
+            border-bottom: 1px solid var(--border);
+            padding: 16px 24px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .header-left { display: flex; align-items: center; gap: 16px; }
+
+        .logo {
+            font-size: 24px;
+            font-weight: 700;
+            color: var(--gold);
+            letter-spacing: 2px;
+        }
+        .logo span { color: var(--text-dim); font-weight: 400; font-size: 14px; }
+
+        .header-right {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            font-size: 12px;
+            color: var(--text-dim);
+        }
+
+        .live-dot {
+            width: 8px; height: 8px;
+            border-radius: 50%;
+            background: var(--gold);
+            animation: pulse 2s infinite;
+            display: inline-block;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.3; }
+        }
+
+        .container { max-width: 1600px; margin: 0 auto; padding: 20px; }
+
+        /* Key Metrics Row */
+        .metrics-row {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 12px;
+            margin-bottom: 20px;
+        }
+
+        .metric-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            padding: 14px 18px;
+            text-align: center;
+        }
+
+        .metric-label {
+            font-size: 10px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: var(--text-dim);
+            margin-bottom: 6px;
+        }
+
+        .metric-value {
+            font-size: 22px;
+            font-weight: 700;
+            color: var(--text-bright);
+        }
+
+        .metric-change { font-size: 11px; font-weight: 600; margin-top: 2px; }
+        .metric-change.up { color: var(--green); }
+        .metric-change.down { color: var(--red); }
+
+        /* Signal Banner */
+        .signal-banner {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 24px 32px;
+            margin-bottom: 20px;
+            display: grid;
+            grid-template-columns: auto 1fr auto;
+            gap: 32px;
+            align-items: center;
+        }
+
+        .signal-action {
+            font-size: 48px;
+            font-weight: 800;
+            letter-spacing: 4px;
+            text-transform: uppercase;
+        }
+
+        .signal-action.buy, .signal-action.strong_buy, .signal-action.weak_buy { color: var(--green); }
+        .signal-action.sell, .signal-action.strong_sell, .signal-action.weak_sell { color: var(--red); }
+        .signal-action.hold { color: var(--yellow); }
+
+        .signal-details { display: flex; flex-direction: column; gap: 8px; }
+
+        .signal-score { font-size: 14px; color: var(--text-dim); }
+        .signal-score strong { font-size: 20px; color: var(--text-bright); }
+
+        .signal-reasoning {
+            font-size: 12px;
+            color: var(--text-dim);
+            max-width: 600px;
+        }
+
+        .price-display { text-align: right; }
+        .price-display .price-label {
+            font-size: 11px;
+            color: var(--gold-dim);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        .price-display .price-value {
+            font-size: 36px;
+            font-weight: 700;
+            color: var(--gold);
+        }
+        .price-display .price-change { font-size: 14px; font-weight: 600; }
+        .price-change.up { color: var(--green); }
+        .price-change.down { color: var(--red); }
+
+        /* Score Bar */
+        .score-bar-container {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 20px 32px;
+            margin-bottom: 20px;
+        }
+
+        .score-bar-label {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 8px;
+            font-size: 11px;
+            color: var(--text-dim);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .score-bar {
+            height: 12px;
+            background: linear-gradient(90deg, var(--red) 0%, var(--yellow) 40%, var(--yellow) 60%, var(--green) 100%);
+            border-radius: 6px;
+            position: relative;
+            overflow: visible;
+        }
+
+        .score-marker {
+            position: absolute;
+            top: -6px;
+            width: 4px;
+            height: 24px;
+            background: white;
+            border-radius: 2px;
+            transform: translateX(-50%);
+            box-shadow: 0 0 8px rgba(255,255,255,0.5);
+            transition: left 0.5s ease;
+        }
+
+        .score-bar-numbers {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 6px;
+            font-size: 10px;
+            color: var(--text-dim);
+        }
+
+        /* Factor Gauges Grid */
+        .factors-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+            gap: 16px;
+            margin-bottom: 20px;
+        }
+
+        .factor-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 20px;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .factor-card:hover {
+            background: var(--bg-card-hover);
+            border-color: var(--gold-dim);
+        }
+
+        .factor-card-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 12px;
+        }
+
+        .factor-name {
+            font-size: 13px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: var(--text-bright);
+        }
+
+        .factor-tier {
+            font-size: 10px;
+            padding: 2px 8px;
+            border-radius: 4px;
+            background: var(--border);
+            color: var(--text-dim);
+        }
+
+        .tier-1 { background: rgba(255, 215, 0, 0.15); color: var(--gold); }
+        .tier-2 { background: rgba(170, 119, 255, 0.15); color: var(--purple); }
+        .tier-3 { background: rgba(0, 229, 255, 0.15); color: var(--cyan); }
+
+        .factor-gauge {
+            height: 8px;
+            background: #1a1a2e;
+            border-radius: 4px;
+            margin-bottom: 8px;
+            overflow: hidden;
+        }
+
+        .factor-gauge-fill {
+            height: 100%;
+            border-radius: 4px;
+            transition: width 0.5s ease;
+        }
+
+        .gauge-bullish { background: linear-gradient(90deg, var(--green-dim), var(--green)); }
+        .gauge-bearish { background: linear-gradient(90deg, var(--red), var(--red-dim)); }
+        .gauge-neutral { background: linear-gradient(90deg, var(--yellow-dim), var(--yellow)); }
+
+        .factor-score-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 8px;
+        }
+
+        .factor-score-value { font-size: 20px; font-weight: 700; }
+
+        .factor-direction {
+            font-size: 11px;
+            font-weight: 600;
+            padding: 2px 10px;
+            border-radius: 4px;
+        }
+
+        .dir-bullish { background: rgba(0, 255, 136, 0.15); color: var(--green); }
+        .dir-bearish { background: rgba(255, 51, 85, 0.15); color: var(--red); }
+        .dir-neutral { background: rgba(255, 204, 0, 0.15); color: var(--yellow); }
+
+        .factor-weight {
+            font-size: 10px;
+            color: var(--text-dim);
+        }
+
+        .factor-signals {
+            display: none;
+            margin-top: 12px;
+            padding-top: 12px;
+            border-top: 1px solid var(--border);
+        }
+
+        .factor-card.expanded .factor-signals { display: block; }
+
+        .factor-signal-item {
+            font-size: 11px;
+            color: var(--text-dim);
+            padding: 3px 0;
+            border-left: 2px solid var(--border);
+            padding-left: 8px;
+            margin-bottom: 4px;
+        }
+
+        .factor-confidence {
+            font-size: 10px;
+            color: var(--text-dim);
+            margin-top: 8px;
+        }
+
+        /* Bottom Grid */
+        .bottom-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 16px;
+        }
+
+        .panel {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 20px;
+        }
+
+        .panel-title {
+            font-size: 13px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: var(--gold);
+            margin-bottom: 16px;
+            padding-bottom: 8px;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .history-list { max-height: 400px; overflow-y: auto; }
+
+        .history-item {
+            display: grid;
+            grid-template-columns: 140px 100px 80px 60px;
+            gap: 8px;
+            padding: 8px 0;
+            border-bottom: 1px solid #0a0a18;
+            font-size: 11px;
+            align-items: center;
+        }
+
+        .history-item .ts { color: var(--text-dim); }
+        .history-item .action { font-weight: 600; }
+        .history-item .action.buy { color: var(--green); }
+        .history-item .action.sell { color: var(--red); }
+        .history-item .action.hold { color: var(--yellow); }
+        .history-item .score { color: var(--text); }
+        .history-item .conf { color: var(--text-dim); }
+
+        .oanda-status { font-size: 12px; }
+
+        .oanda-row {
+            display: flex;
+            justify-content: space-between;
+            padding: 6px 0;
+            border-bottom: 1px solid #0a0a18;
+        }
+
+        .oanda-row .label { color: var(--text-dim); }
+        .oanda-row .value { color: var(--text-bright); font-weight: 600; }
+
+        .btn-refresh {
+            background: transparent;
+            border: 1px solid var(--gold-dim);
+            color: var(--gold);
+            padding: 6px 16px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-family: inherit;
+            font-size: 11px;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            transition: all 0.2s;
+        }
+
+        .btn-refresh:hover {
+            background: rgba(255, 215, 0, 0.1);
+            border-color: var(--gold);
+        }
+
+        .btn-refresh:disabled { opacity: 0.3; cursor: not-allowed; }
+
+        .price-chart { width: 100%; height: 200px; position: relative; margin-top: 12px; }
+        .price-chart canvas { width: 100%; height: 100%; }
+
+        ::-webkit-scrollbar { width: 6px; }
+        ::-webkit-scrollbar-track { background: var(--bg); }
+        ::-webkit-scrollbar-thumb { background: var(--border); border-radius: 3px; }
+        ::-webkit-scrollbar-thumb:hover { background: var(--gold-dim); }
+
+        .error-msg { color: var(--red); font-size: 12px; padding: 8px; text-align: center; }
+        .loading { color: var(--text-dim); font-size: 12px; text-align: center; padding: 20px; }
+
+        @media (max-width: 768px) {
+            .signal-banner { grid-template-columns: 1fr; gap: 16px; text-align: center; }
+            .price-display { text-align: center; }
+            .factors-grid { grid-template-columns: 1fr; }
+            .bottom-grid { grid-template-columns: 1fr; }
+            .metrics-row { grid-template-columns: repeat(2, 1fr); }
+            .signal-action { font-size: 32px; }
+            .price-display .price-value { font-size: 28px; }
+            .header { flex-direction: column; gap: 8px; }
+            .history-item { grid-template-columns: 1fr 1fr; }
+        }
+
+        @media (max-width: 480px) {
+            .container { padding: 10px; }
+            .signal-banner { padding: 16px; }
+            .factor-card { padding: 14px; }
+            .metrics-row { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <div class="header-left">
+            <div class="logo">MADEYE <span>Gold Intelligence v1.0</span></div>
+        </div>
+        <div class="header-right">
+            <span class="live-dot"></span>
+            <span id="last-update">Loading...</span>
+            <button class="btn-refresh" id="btn-refresh" onclick="forceRefresh()">Refresh</button>
+        </div>
+    </div>
+
+    <div class="container">
+        <!-- Key Metrics -->
+        <div class="metrics-row">
+            <div class="metric-card">
+                <div class="metric-label">Gold (XAU/USD)</div>
+                <div class="metric-value" id="m-gold">$--</div>
+                <div class="metric-change" id="m-gold-chg">--</div>
+            </div>
+            <div class="metric-card">
+                <div class="metric-label">DXY</div>
+                <div class="metric-value" id="m-dxy">--</div>
+                <div class="metric-change" id="m-dxy-chg">--</div>
+            </div>
+            <div class="metric-card">
+                <div class="metric-label">10Y Yield</div>
+                <div class="metric-value" id="m-10y">--</div>
+                <div class="metric-change" id="m-10y-chg">--</div>
+            </div>
+            <div class="metric-card">
+                <div class="metric-label">VIX</div>
+                <div class="metric-value" id="m-vix">--</div>
+                <div class="metric-change" id="m-vix-chg">--</div>
+            </div>
+            <div class="metric-card">
+                <div class="metric-label">Signal</div>
+                <div class="metric-value" id="m-signal" style="color: var(--yellow)">--</div>
+                <div class="metric-change" id="m-signal-score">--</div>
+            </div>
+        </div>
+
+        <!-- Signal Banner -->
+        <div class="signal-banner" id="signal-banner">
+            <div class="signal-action hold" id="signal-action">---</div>
+            <div class="signal-details">
+                <div class="signal-score">
+                    Net Score: <strong id="signal-score">0.00</strong>
+                    &nbsp;&nbsp;|&nbsp;&nbsp;
+                    Confidence: <strong id="signal-confidence">0%</strong>
+                </div>
+                <div class="signal-reasoning" id="signal-reasoning">Waiting for data collection...</div>
+            </div>
+            <div class="price-display">
+                <div class="price-label">Gold Futures</div>
+                <div class="price-value" id="price-value">$--</div>
+                <div class="price-change" id="price-change">--</div>
+            </div>
+        </div>
+
+        <!-- Composite Score Bar -->
+        <div class="score-bar-container">
+            <div class="score-bar-label">
+                <span>STRONG SELL</span>
+                <span>SELL</span>
+                <span>HOLD</span>
+                <span>BUY</span>
+                <span>STRONG BUY</span>
+            </div>
+            <div class="score-bar">
+                <div class="score-marker" id="score-marker" style="left:50%"></div>
+            </div>
+            <div class="score-bar-numbers">
+                <span>-20</span>
+                <span>-12</span>
+                <span>-5</span>
+                <span>0</span>
+                <span>+5</span>
+                <span>+12</span>
+                <span>+20</span>
+            </div>
+        </div>
+
+        <!-- Factor Gauges -->
+        <div class="factors-grid" id="factors-grid">
+            <div class="loading">Loading gold factor data...</div>
+        </div>
+
+        <!-- Bottom Grid -->
+        <div class="bottom-grid">
+            <div class="panel">
+                <div class="panel-title">Signal History</div>
+                <div class="history-list" id="history-list">
+                    <div class="loading">Loading history...</div>
+                </div>
+            </div>
+
+            <div class="panel">
+                <div class="panel-title">OANDA Bridge (XAU/USD)</div>
+                <div class="oanda-status" id="oanda-status">
+                    <div class="loading">Loading OANDA status...</div>
+                </div>
+                <div style="margin-top:20px">
+                    <div class="panel-title">Gold Price Chart (5D)</div>
+                    <div class="price-chart">
+                        <canvas id="price-canvas"></canvas>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+    const FACTOR_MAP = {
+        dxy:              { tier: 1, label: 'DXY (Dollar Index)', cls: 'tier-1', weight: '25%' },
+        technical_gold:   { tier: 1, label: 'Technical Analysis', cls: 'tier-1', weight: '10%' },
+        real_rates:       { tier: 2, label: 'Real Interest Rates', cls: 'tier-2', weight: '20%' },
+        treasury:         { tier: 2, label: 'Treasury/Yields', cls: 'tier-2', weight: '10%' },
+        geopolitical_gold:{ tier: 2, label: 'Geopolitical/VIX', cls: 'tier-2', weight: '10%' },
+        central_banks:    { tier: 3, label: 'Central Bank Buying', cls: 'tier-3', weight: '10%' },
+        etf_flows_gold:   { tier: 3, label: 'ETF Flows (GLD/IAU)', cls: 'tier-3', weight: '8%' },
+        inflation:        { tier: 3, label: 'Inflation (CPI/PCE)', cls: 'tier-3', weight: '7%' },
+        currency_gold:    { tier: 3, label: 'Currency Correlation', cls: 'tier-3', weight: '5%' },
+        seasonal_gold:    { tier: 3, label: 'Seasonal/Cultural', cls: 'tier-3', weight: '5%' },
+    };
+
+    let priceHistory = [];
+
+    async function fetchJSON(url) {
+        try {
+            const resp = await fetch(url);
+            if (!resp.ok) throw new Error(`HTTP ${resp.status}`);
+            return await resp.json();
+        } catch (e) {
+            console.error(`Fetch error ${url}:`, e);
+            return null;
+        }
+    }
+
+    function formatTime(iso) {
+        if (!iso) return '--';
+        const d = new Date(iso);
+        return d.toLocaleString('en-US', {
+            month: 'short', day: 'numeric',
+            hour: '2-digit', minute: '2-digit', second: '2-digit',
+            hour12: false
+        });
+    }
+
+    async function updateSignal() {
+        const data = await fetchJSON('/api/signal');
+        if (!data) return;
+
+        const el = document.getElementById('signal-action');
+        const action = data.action || 'HOLD';
+        el.textContent = action.replace(/_/g, ' ');
+        el.className = 'signal-action ' + action.toLowerCase();
+
+        document.getElementById('signal-score').textContent = (data.net_score || 0).toFixed(2);
+        document.getElementById('signal-confidence').textContent =
+            Math.round((data.confidence || 0) * 100) + '%';
+        document.getElementById('signal-reasoning').textContent = data.reasoning || '';
+        document.getElementById('last-update').textContent = formatTime(data.timestamp);
+
+        // Score marker: map -20..+20 to 0%..100%
+        const net = Math.max(-20, Math.min(20, data.net_score || 0));
+        const pct = ((net + 20) / 40) * 100;
+        document.getElementById('score-marker').style.left = pct + '%';
+
+        // Update signal metric
+        const mSig = document.getElementById('m-signal');
+        mSig.textContent = action.replace(/_/g, ' ');
+        if (action.includes('BUY')) mSig.style.color = 'var(--green)';
+        else if (action.includes('SELL')) mSig.style.color = 'var(--red)';
+        else mSig.style.color = 'var(--yellow)';
+        document.getElementById('m-signal-score').textContent = 'Net: ' + (data.net_score || 0).toFixed(1);
+
+        // Extract metrics from factor details
+        const factors = data.factor_scores || {};
+        if (factors.dxy && factors.dxy.details) {
+            const dxy = factors.dxy.details.dxy_current;
+            if (dxy) {
+                document.getElementById('m-dxy').textContent = dxy.toFixed(2);
+            }
+        }
+        if (factors.treasury && factors.treasury.details) {
+            const y10 = factors.treasury.details.yield_10y;
+            if (y10) {
+                document.getElementById('m-10y').textContent = y10.toFixed(2) + '%';
+            }
+        }
+        if (factors.geopolitical_gold && factors.geopolitical_gold.details) {
+            const vix = factors.geopolitical_gold.details.vix_current;
+            if (vix) {
+                document.getElementById('m-vix').textContent = vix.toFixed(1);
+            }
+        }
+
+        // Factor cards
+        renderFactors(factors);
+    }
+
+    function renderFactors(factors) {
+        const grid = document.getElementById('factors-grid');
+        let html = '';
+
+        // Sort by tier then weight
+        const ordered = Object.keys(FACTOR_MAP).sort((a, b) => {
+            const ta = FACTOR_MAP[a].tier, tb = FACTOR_MAP[b].tier;
+            return ta !== tb ? ta - tb : 0;
+        });
+
+        for (const name of ordered) {
+            const meta = FACTOR_MAP[name];
+            const f = factors[name];
+            if (!f) continue;
+
+            const raw = f.raw_score || 5;
+            const dir = f.direction || 'NEUTRAL';
+            const conf = f.confidence || 0;
+            const sigs = f.signals || [];
+            const weighted = f.weighted_score || 0;
+
+            let gaugeClass = 'gauge-neutral';
+            let dirClass = 'dir-neutral';
+            if (dir === 'BULLISH') { gaugeClass = 'gauge-bullish'; dirClass = 'dir-bullish'; }
+            if (dir === 'BEARISH') { gaugeClass = 'gauge-bearish'; dirClass = 'dir-bearish'; }
+
+            let scoreColor = 'var(--yellow)';
+            if (raw >= 7) scoreColor = 'var(--green)';
+            else if (raw <= 3) scoreColor = 'var(--red)';
+
+            html += `
+            <div class="factor-card" onclick="this.classList.toggle('expanded')">
+                <div class="factor-card-header">
+                    <span class="factor-name">${meta.label}</span>
+                    <span class="factor-tier ${meta.cls}">T${meta.tier} | ${meta.weight}</span>
+                </div>
+                <div class="factor-gauge">
+                    <div class="factor-gauge-fill ${gaugeClass}" style="width:${raw*10}%"></div>
+                </div>
+                <div class="factor-score-row">
+                    <span class="factor-score-value" style="color:${scoreColor}">${raw.toFixed(1)}</span>
+                    <span class="factor-direction ${dirClass}">${dir}</span>
+                </div>
+                <div class="factor-weight">Weighted: ${weighted >= 0 ? '+' : ''}${weighted.toFixed(2)} | Confidence: ${Math.round(conf*100)}%</div>
+                <div class="factor-signals">
+                    ${sigs.map(s => `<div class="factor-signal-item">${s}</div>`).join('')}
+                </div>
+            </div>`;
+        }
+
+        grid.innerHTML = html || '<div class="loading">No factor data yet</div>';
+    }
+
+    async function updatePrice() {
+        const data = await fetchJSON('/api/price');
+        if (!data) return;
+
+        const price = data.price || 0;
+        const change = data.change || 0;
+        const changePct = data.change_pct || 0;
+
+        document.getElementById('price-value').textContent = '$' + price.toFixed(2);
+        document.getElementById('m-gold').textContent = '$' + price.toFixed(0);
+
+        const chgEl = document.getElementById('price-change');
+        const mChgEl = document.getElementById('m-gold-chg');
+        const sign = change >= 0 ? '+' : '';
+        chgEl.textContent = `${sign}${change.toFixed(2)} (${sign}${changePct.toFixed(2)}%)`;
+        chgEl.className = `price-change ${change >= 0 ? 'up' : 'down'}`;
+        mChgEl.textContent = `${sign}${changePct.toFixed(2)}%`;
+        mChgEl.className = `metric-change ${change >= 0 ? 'up' : 'down'}`;
+
+        priceHistory = (data.history || []).map(h => ({
+            date: h.date,
+            close: h.close,
+        }));
+        drawPriceChart();
+    }
+
+    async function updateHistory() {
+        const data = await fetchJSON('/api/history?limit=50');
+        if (!data || !data.signals) return;
+
+        const list = document.getElementById('history-list');
+        if (data.signals.length === 0) {
+            list.innerHTML = '<div class="loading">No signal history yet</div>';
+            return;
+        }
+
+        let html = '';
+        for (const s of data.signals.slice().reverse()) {
+            const actionLower = (s.action || 'hold').toLowerCase();
+            let actionClass = 'hold';
+            if (actionLower.includes('buy')) actionClass = 'buy';
+            if (actionLower.includes('sell')) actionClass = 'sell';
+
+            html += `<div class="history-item">
+                <span class="ts">${formatTime(s.timestamp)}</span>
+                <span class="action ${actionClass}">${s.action}</span>
+                <span class="score">${(s.net_score||0).toFixed(1)}</span>
+                <span class="conf">${Math.round((s.confidence||0)*100)}%</span>
+            </div>`;
+        }
+        list.innerHTML = html;
+    }
+
+    async function updateOANDA() {
+        const data = await fetchJSON('/api/oanda/status');
+        if (!data) return;
+
+        const el = document.getElementById('oanda-status');
+        let html = '';
+
+        html += `<div class="oanda-row"><span class="label">Instrument</span><span class="value">${data.instrument || 'XAU_USD'}</span></div>`;
+        html += `<div class="oanda-row"><span class="label">Mode</span><span class="value" style="color:${data.dry_run ? 'var(--yellow)' : 'var(--green)'}">${data.dry_run ? 'DRY RUN' : 'LIVE'}</span></div>`;
+        html += `<div class="oanda-row"><span class="label">Configured</span><span class="value">${data.configured ? 'Yes' : 'No'}</span></div>`;
+
+        if (data.account) {
+            const acct = data.account;
+            if (acct.balance) html += `<div class="oanda-row"><span class="label">Balance</span><span class="value">${acct.balance}</span></div>`;
+            if (acct.unrealizedPL) html += `<div class="oanda-row"><span class="label">Unrealized P/L</span><span class="value">${acct.unrealizedPL}</span></div>`;
+        }
+
+        if (data.positions && data.positions.length > 0) {
+            html += `<div class="oanda-row"><span class="label">Positions</span><span class="value" style="color:var(--green)">${data.positions.length} open</span></div>`;
+        }
+
+        if (data.recent_trades && data.recent_trades.length > 0) {
+            html += `<div style="margin-top:12px; font-size:10px; color:var(--text-dim)">RECENT TRADES</div>`;
+            for (const t of data.recent_trades.slice(-5).reverse()) {
+                const col = t.action === 'CLOSE_ALL' ? 'var(--yellow)' : t.action.includes('LONG') ? 'var(--green)' : 'var(--red)';
+                html += `<div class="oanda-row">
+                    <span class="label">${formatTime(t.timestamp)}</span>
+                    <span class="value" style="color:${col}">${t.action} ${t.status || ''}</span>
+                </div>`;
+            }
+        }
+
+        el.innerHTML = html;
+    }
+
+    function drawPriceChart() {
+        const canvas = document.getElementById('price-canvas');
+        if (!canvas || priceHistory.length === 0) return;
+
+        const ctx = canvas.getContext('2d');
+        const rect = canvas.parentElement.getBoundingClientRect();
+        canvas.width = rect.width * 2;
+        canvas.height = rect.height * 2;
+        ctx.scale(2, 2);
+        const w = rect.width, h = rect.height;
+
+        ctx.clearRect(0, 0, w, h);
+
+        const closes = priceHistory.map(p => p.close);
+        const minP = Math.min(...closes) * 0.998;
+        const maxP = Math.max(...closes) * 1.002;
+        const range = maxP - minP || 1;
+
+        // Grid lines
+        ctx.strokeStyle = '#1a1a2e';
+        ctx.lineWidth = 0.5;
+        for (let i = 0; i < 4; i++) {
+            const y = (h / 4) * (i + 0.5);
+            ctx.beginPath();
+            ctx.moveTo(0, y);
+            ctx.lineTo(w, y);
+            ctx.stroke();
+        }
+
+        // Price line
+        const isUp = closes[closes.length - 1] >= closes[0];
+        ctx.strokeStyle = isUp ? '#ffd700' : '#ff3355';
+        ctx.lineWidth = 2;
+        ctx.beginPath();
+        for (let i = 0; i < closes.length; i++) {
+            const x = (i / (closes.length - 1)) * w;
+            const y = h - ((closes[i] - minP) / range) * h * 0.85 - h * 0.05;
+            if (i === 0) ctx.moveTo(x, y);
+            else ctx.lineTo(x, y);
+        }
+        ctx.stroke();
+
+        // Fill area
+        ctx.globalAlpha = 0.1;
+        ctx.fillStyle = isUp ? '#ffd700' : '#ff3355';
+        ctx.lineTo(w, h);
+        ctx.lineTo(0, h);
+        ctx.closePath();
+        ctx.fill();
+        ctx.globalAlpha = 1;
+
+        // Labels
+        ctx.fillStyle = '#6a6a80';
+        ctx.font = '10px monospace';
+        ctx.fillText('$' + maxP.toFixed(0), 4, 14);
+        ctx.fillText('$' + minP.toFixed(0), 4, h - 4);
+
+        // Date labels
+        if (priceHistory.length > 0) {
+            ctx.fillText(priceHistory[0].date, 4, h - 16);
+            const lastDate = priceHistory[priceHistory.length - 1].date;
+            const tw = ctx.measureText(lastDate).width;
+            ctx.fillText(lastDate, w - tw - 4, h - 16);
+        }
+    }
+
+    async function forceRefresh() {
+        const btn = document.getElementById('btn-refresh');
+        btn.disabled = true;
+        btn.textContent = 'Refreshing...';
+        try {
+            await fetchJSON('/api/refresh');
+            await refreshAll();
+        } catch(e) {}
+        btn.disabled = false;
+        btn.textContent = 'Refresh';
+    }
+
+    async function refreshAll() {
+        await Promise.all([
+            updateSignal(),
+            updatePrice(),
+            updateHistory(),
+            updateOANDA(),
+        ]);
+    }
+
+    // Initial load
+    refreshAll();
+
+    // Auto-refresh every 30 seconds
+    setInterval(refreshAll, 30000);
+
+    // Redraw chart on resize
+    window.addEventListener('resize', drawPriceChart);
+    </script>
+</body>
+</html>
